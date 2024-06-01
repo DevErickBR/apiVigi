@@ -8,15 +8,16 @@ const router = Router();
 
 router.get('/ping', (req, res) => {
     res.json({
-        pong: true,
-        login: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD
+        pong: true
     })
 });
 
 router.get("/clientes",);
 
 router.get("/grupos", GRUPOS.ALL_GRUPOS);
-
+router.get('/grupo', GRUPOS.FIND_GRUPO);
+router.post('/grupos', GRUPOS.CREATE_GRUPO);
+router.delete('/grupo', GRUPOS.DELETE_GRUPO);
+router.put('/grupo', GRUPOS.EDIT_GRUPO);
 
 export default router;
