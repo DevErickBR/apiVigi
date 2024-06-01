@@ -28,7 +28,16 @@ export const FIND_GRUPO = async (req: Request, res: Response) => {
         return;
     };
 
-    const grupo = await TB_GRUPOS.findByPk(ID_GRUPO);
+    const grupo = await TB_GRUPOS.findByPk(ID_GRUPO).catch((err) => {
+        if (err.name === 'SequelizeConnectionError') {
+            res.status(500).json('Banco de dados está fora do ar! por favor acione o suporte!');
+            return;
+        } else {
+            res.status(404);
+            return
+        }
+    })
+
     if (grupo) {
         res.status(200).json(grupo);
         return;
@@ -84,14 +93,16 @@ export const DELETE_GRUPO = async (req: Request, res: Response) => {
     if (dropGrupo) {
         res.status(200).json('grupo deletado com sucesso!');
         return;
-    };
+    } else {
+        res.status(404).json('grupo não encontrado!')
+    }
 };
 
 // realiza a edicao de um grupo
 
 export const EDIT_GRUPO = async (req: Request, res: Response) => {
     const { ID_GRUPO, NOME_GRUPO } = req.body
-    if (!ID_GRUPO && !NOME_GRUPO) {
+    if (!ID_GRUPO || !NOME_GRUPO) {
         res.status(400).json('valores nulos não são aceitos');
         return
     }
@@ -107,5 +118,7 @@ export const EDIT_GRUPO = async (req: Request, res: Response) => {
 
     if (updateGrupo) {
         res.status(200).json('grupo atualizado com sucesso!')
+    } else {
+        res.status(404).json('grupo não encontrado!')
     }
 }

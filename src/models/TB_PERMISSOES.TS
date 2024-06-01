@@ -2,12 +2,12 @@ import { Model, DataTypes } from "sequelize";
 import { sequelize } from '../instances/mysql'
 
 interface PERMISSOES extends Model {
-    ID_GRUPO: number,
+    ID_PERMISSAO: number,
     DESC_PERMISSAO: string
 }
 
 export const TB_PERMISSOES = sequelize.define<PERMISSOES>('TB_PERMISSOES', {
-    ID_GRUPO: {
+    ID_PERMISSAO: {
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
