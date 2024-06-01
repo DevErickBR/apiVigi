@@ -2,6 +2,7 @@ import { Router } from "express";
 import dotenv from 'dotenv';
 import * as GRUPOS from '../controllers/ROUTERS_GRUPOS'
 import * as PERMISSOES from '../controllers/ROUTERS_PERMISSOES'
+import * as GRUPO_PERMISSAO from '../controllers/ROUTERS_GRUPO_PERMISSAO'
 
 dotenv.config()
 
@@ -27,6 +28,10 @@ router.post('/permissoes/permissao', PERMISSOES.CREATE_PERMISSAO)
 router.delete('/permissoes/permissao', PERMISSOES.DELETE_PERMISSAO)
 router.put('/permissoes/permissao', PERMISSOES.EDIT_PERMISSAO)
 
+router.get('/grupo-permissoes', GRUPO_PERMISSAO.FIND_GRUPOperPERMISSAO)
+router.post('/grupo-permissao', GRUPO_PERMISSAO.addGRUPOforPERMISSAO)
+router.delete('/grupo-permissao', GRUPO_PERMISSAO.delPERMISSAOofGRUPO)
+router.get('/permissao-grupos', GRUPO_PERMISSAO.FIND_PERMISSOESperGRUPO)
 
 
 export default router;

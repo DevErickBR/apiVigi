@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from '../instances/mysql'
 
+
 interface PERMISSOES extends Model {
     ID_PERMISSAO: number,
     DESC_PERMISSAO: string
