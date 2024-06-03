@@ -46,5 +46,8 @@ router.get('/usuarios', USUARIOS.ALL_USUARIOS)
 router.get('/usuarios/usuario', USUARIOS.FIND_USUARIO)
 router.post('/usuarios/usuario', USUARIOS.CREATE_USUARIO)
 router.put('/usuarios/usuario', USUARIOS.EDIT_DADOS_CLIENTE)
+router.put('/usuarios/usuario/situacao', USUARIOS.EDIT_SITUACAO_USUARIO)
+router.put('/usuarios/usuario/senha', USUARIOS.ATT_SENHA_USUARIO)
+router.put('/usuarios/usuario/pagamento', USUARIOS.ATT_PAGAMENTO_USUARIO)
 
 export default router;
