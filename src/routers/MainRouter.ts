@@ -1,22 +1,15 @@
 import { Router } from "express";
 import dotenv from 'dotenv';
-import * as GRUPOS from '../controllers/ROUTERS_GRUPOS'
-import * as PERMISSOES from '../controllers/ROUTERS_PERMISSOES'
-import * as GRUPO_PERMISSAO from '../controllers/ROUTERS_GRUPO_PERMISSAO'
-import * as USUARIOS from '../controllers/ROUTERS.USUARIOS'
-import * as USUARIOS_SETORES from '../controllers/ROUTERS_USUARIOS_SETORES'
+import * as GRUPOS from '../controllers/ROUTERS_GRUPOS';
+import * as PERMISSOES from '../controllers/ROUTERS_PERMISSOES';
+import * as GRUPO_PERMISSAO from '../controllers/ROUTERS_GRUPO_PERMISSAO';
+import * as USUARIOS from '../controllers/ROUTERS.USUARIOS';
+import * as USUARIOS_SETORES from '../controllers/ROUTERS_USUARIOS_SETORES';
+import * as SITUACOES from '../controllers/ROUTERS_SITUACOES';
 
 dotenv.config()
 
 const router = Router();
-
-router.get('/ping', (req, res) => {
-    res.json({
-        pong: true
-    })
-});
-
-router.get("/clientes",);
 
 // ROTAS relacionadas a TB_GRUPOS
 
@@ -58,5 +51,11 @@ router.get('/usuario-setores', USUARIOS_SETORES.FIND_USUARIOitsSETORES);
 router.get('/setor-usuarios', USUARIOS_SETORES.FIND_SETORitsUSUARIOS);
 router.post('/usuario-setor', USUARIOS_SETORES.addUSUARIOforSetor);
 router.delete('/usuario-setor', USUARIOS_SETORES.delUSUARIOofSETOR);
+
+// ROTAS relacionadas a TB_SITUACOES
+
+router.get('/situacoes', SITUACOES.FIND_SITUACOES);
+router.post('/situacao', SITUACOES.CREATE_SITUACOES);
+router.delete('/situacao', SITUACOES.DEL_SITUACOES);
 
 export default router;

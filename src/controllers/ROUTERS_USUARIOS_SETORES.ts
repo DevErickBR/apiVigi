@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { ASSOC_USUARIOS_SETORES } from "../models/ASSOC_USUARIOS_SETORES";
-import { ASSOC_GRUPO_PERMISSAO } from "../models/ASSOC_GRUPO_PERMISSAO";
 
 // pesquisa usuarios do setor
 
