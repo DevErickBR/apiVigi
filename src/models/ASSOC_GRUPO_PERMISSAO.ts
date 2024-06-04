@@ -11,7 +11,7 @@ interface GRUPO_PERMISSAO extends Model {
 
 export const ASSOC_GRUPO_PERMISSAO = sequelize.define<GRUPO_PERMISSAO>('ASSOC_GRUPO_PERMISSAO', {
     ID_GRUPO: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
         references: {
             model: TB_GRUPOS,
@@ -20,7 +20,7 @@ export const ASSOC_GRUPO_PERMISSAO = sequelize.define<GRUPO_PERMISSAO>('ASSOC_GR
         allowNull: false,
     },
     ID_PERMISSAO: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
         references: {
             model: TB_PERMISSOES,

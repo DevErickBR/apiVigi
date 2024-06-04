@@ -33,21 +33,21 @@ export const TB_USUARIOS = sequelize.define<USUARIO>('TB_USUARIOS', {
         unique: true
     },
     ID_GRUPO: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
             model: TB_GRUPOS,
             key: 'ID_GRUPO'
         }
     },
     ID_LICENCA: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
             model: TB_LICENCAS,
             key: 'ID_LICENCA'
         }
     },
     ID_SITUACAO: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
             model: TB_SITUACOES,
             key: 'ID_SITUACAO'

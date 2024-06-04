@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { ASSOC_GRUPO_PERMISSAO } from "../models/ASSOC_GRUPO_PERMISSAO";
 
+
 //pesquisa permissão dos grupos
 
-
-export const FIND_GRUPOperPERMISSAO = async (req: Request, res: Response) => {
+export const FIND_GRUPOitsPERMISSAOES = async (req: Request, res: Response) => {
     const { ID_GRUPO } = req.body
     if (!ID_GRUPO) {
         res.status(400).json('valores nulos não são aceitos!')
@@ -31,13 +31,13 @@ export const FIND_GRUPOperPERMISSAO = async (req: Request, res: Response) => {
 
 // busca em que grupos a permissao esta associada
 
-export const FIND_PERMISSOESperGRUPO = async (req: Request, res: Response) => {
+export const FIND_PERMISSAOoftheGRUPOS = async (req: Request, res: Response) => {
     const { ID_PERMISSAO } = req.body;
     if (!ID_PERMISSAO) {
         res.status(400).json('valores nulos não são aceitos!');
     };
 
-    const grupoPermissao = await ASSOC_GRUPO_PERMISSAO.findAll({ where: { ID_PERMISSAO: ID_PERMISSAO } }).catch((err) => {
+    const grupoPermissao = await ASSOC_GRUPO_PERMISSAO.findAll({ where: { ID_PERMISSAO } }).catch((err) => {
         if (err.name === 'SequelizeConnectionError') {
             res.status(500).json('Banco de dados está fora do ar! por favor acione o suporte!');
             return;
