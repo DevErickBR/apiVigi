@@ -35,7 +35,7 @@ export const CREATE_SITUACOES = async (res: Response, req: Request) => {
     }
 };
 
-// ---
+// ---------------
 
 export const DEL_SITUACOES = async (res: Response, req: Request) => {
     const { ID_SITUACAO } = req.body;

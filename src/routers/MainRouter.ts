@@ -7,6 +7,7 @@ import * as USUARIOS from '../controllers/ROUTERS.USUARIOS';
 import * as USUARIOS_SETORES from '../controllers/ROUTERS_USUARIOS_SETORES';
 import * as SITUACOES from '../controllers/ROUTERS_SITUACOES';
 import * as SETORES from '../controllers/ROUTERS_SETORES';
+import * as LICENCAS from '../controllers/ROUTERS_LICENCAS';
 
 dotenv.config()
 
@@ -65,6 +66,16 @@ router.get('/setores', SETORES.ALL_SETORES);
 router.get('/setores/setor', SETORES.FIND_SETOR);
 router.post('/setores/setor', SETORES.CREATE_SETOR);
 router.delete('/setores/setor', SETORES.DEL_SETOR);
+router.put('/setores/setor', SETORES.EDIT_SETOR);
+
+// ROTAS relacionadas a TB_LICENCAS
+
+router.get('/licencas', LICENCAS.ALL_LICENCAS);
+router.get('/licencas/licenca', LICENCAS.FIND_LICENCA);
+router.post('/licencas/licenca', LICENCAS.CRATE_LICENCA);
+router.delete('/licencas/licenca', LICENCAS.DEL_LICENCA);
+router.put('/licencas/licenca', LICENCAS.EDIT_LICENCA);
+
 
 
 export default router;

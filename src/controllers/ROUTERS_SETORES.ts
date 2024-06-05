@@ -7,7 +7,7 @@ export const ALL_SETORES = async (req: Request, res: Response) => {
             res.status(500).json('algo de errado com o servidor!, tente novamente em instantes, caso permaneça acione o suporte!')
             return
         } else {
-            res.status(400).json('ops! algo errado, verique suaa solitações, caso permança, acione o suporte!')
+            res.status(400).json('ops! algo errado, verique suaa solitações, caso permaneça, acione o suporte!')
             return
         }
     });
@@ -37,7 +37,7 @@ export const FIND_SETOR = async (req: Request, res: Response) => {
             res.status(500).json('algo de errado com o servidor!, tente novamente em instantes, caso permaneça acione o suporte!')
             return
         } else {
-            res.status(400).json('ops! algo errado, verique suaa solitações, caso permança, acione o suporte!')
+            res.status(400).json('ops! algo errado, verique suaa solitações, caso permaneça, acione o suporte!')
             return
         }
     })
@@ -98,8 +98,12 @@ export const DEL_SETOR = async (req: Request, res: Response) => {
     if (delSetor) {
         res.status(200).json('setor deletado com sucesso!');
         return
+    } else {
+        res.status(404).json('setor ja apagado anteriomente');
     }
 };
+
+// ----------
 
 export const EDIT_SETOR = async (req: Request, res: Response) => {
     const { ID_SETOR, NEW_NOME } = req.body
