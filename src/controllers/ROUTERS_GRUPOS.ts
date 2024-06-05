@@ -9,7 +9,7 @@ export const ALL_GRUPOS = async (req: Request, res: Response) => {
             res.status(500).json('Banco de dados está fora do ar! por favor acione o suporte!');
             return;
         } else {
-            res.status(404);
+            res.status(404).json('algo de errado aconteceu, tente novamente em instantes, caso permaneça, acione o suporte!');
             return
         }
     })
@@ -18,6 +18,7 @@ export const ALL_GRUPOS = async (req: Request, res: Response) => {
             res.status(200).json(allGrupos);
         } else {
             res.status(404).json('sistema ainda não possui grupos cadastrados!')
+            return
         }
     };
 };
@@ -37,7 +38,7 @@ export const FIND_GRUPO = async (req: Request, res: Response) => {
             res.status(500).json('Banco de dados está fora do ar! por favor acione o suporte!');
             return;
         } else {
-            res.status(404);
+            res.status(404).json('sistema ainda não possui grupos cadastrados!')
             return
         }
     })
