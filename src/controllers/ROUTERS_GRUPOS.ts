@@ -14,7 +14,11 @@ export const ALL_GRUPOS = async (req: Request, res: Response) => {
         }
     })
     if (allGrupos) {
-        res.status(200).json(allGrupos);
+        if (allGrupos.length != 0) {
+            res.status(200).json(allGrupos);
+        } else {
+            res.status(404).json('sistema ainda não possui grupos cadastrados!')
+        }
     };
 };
 

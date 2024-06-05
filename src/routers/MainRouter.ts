@@ -6,6 +6,7 @@ import * as GRUPO_PERMISSAO from '../controllers/ROUTERS_GRUPO_PERMISSAO';
 import * as USUARIOS from '../controllers/ROUTERS.USUARIOS';
 import * as USUARIOS_SETORES from '../controllers/ROUTERS_USUARIOS_SETORES';
 import * as SITUACOES from '../controllers/ROUTERS_SITUACOES';
+import * as SETORES from '../controllers/ROUTERS_SETORES';
 
 dotenv.config()
 
@@ -58,4 +59,13 @@ router.get('/situacoes', SITUACOES.FIND_SITUACOES);
 router.post('/situacao', SITUACOES.CREATE_SITUACOES);
 router.delete('/situacao', SITUACOES.DEL_SITUACOES);
 
+// ROTAS relacionadas a TB_SETORES
+
+router.get('/setores', SETORES.ALL_SETORES);
+router.get('/setores/setor', SETORES.FIND_SETOR);
+router.post('/setores/setor', SETORES.CREATE_SETOR);
+router.delete('/setores/setor', SETORES.DEL_SETOR);
+
+
 export default router;
+
