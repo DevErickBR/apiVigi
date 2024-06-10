@@ -8,6 +8,7 @@ import * as USUARIOS_SETORES from '../controllers/ROUTERS_USUARIOS_SETORES';
 import * as SITUACOES from '../controllers/ROUTERS_SITUACOES';
 import * as SETORES from '../controllers/ROUTERS_SETORES';
 import * as LICENCAS from '../controllers/ROUTERS_LICENCAS';
+import * as DEF_DUCUMENTOS from '../controllers/ROUTERS_DEF_DOCUMENTOS'
 
 dotenv.config()
 
@@ -75,6 +76,14 @@ router.get('/licencas/licenca', LICENCAS.FIND_LICENCA);
 router.post('/licencas/licenca', LICENCAS.CRATE_LICENCA);
 router.delete('/licencas/licenca', LICENCAS.DEL_LICENCA);
 router.put('/licencas/licenca', LICENCAS.EDIT_LICENCA);
+
+//ROTAS relacionadas a todo tipo de definição.
+
+//DEF_DOCUMENTOS
+router.get('/defs/tipos-documento', DEF_DUCUMENTOS.ALL_DEF_DOCUMENTOS);
+router.get('/defs/tipo-documento', DEF_DUCUMENTOS.FIND_DEF_DOCUMENTO);
+router.post('/defs/tipo-documento', DEF_DUCUMENTOS.CREATE_DEF_DOCUMENTO);
+router.delete('/defs/tipo-documento', DEF_DUCUMENTOS.DELETE_DEF_DOCUMENTO);
 
 
 

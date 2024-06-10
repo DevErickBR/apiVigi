@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { TB_USUARIOS } from "../models/TB_USUARIOS";
+import dataAgora from '../helpers/get_data_agora'
 
 export const ALL_USUARIOS = async (req: Request, res: Response) => {
     const allUsuarios = await TB_USUARIOS.findAll().catch((err) => {
@@ -46,11 +47,13 @@ export const FIND_USUARIO = async (req: Request, res: Response) => {
 
 export const CREATE_USUARIO = async (req: Request, res: Response) => {
 
-    const { NOME, SOBRENOME, EMAIL, ID_GRUPO, ID_SITUACAO, SENHA, ID_LICENCA, ULTIMO_PAGAMENTO_LICENCA } = req.body;
-    if (!NOME || !SOBRENOME || !EMAIL || !ID_GRUPO || !ID_LICENCA || !ID_SITUACAO || !ULTIMO_PAGAMENTO_LICENCA || !SENHA) {
+    const { NOME, SOBRENOME, EMAIL, ID_GRUPO, ID_SITUACAO, SENHA, ID_LICENCA } = req.body;
+    if (!NOME || !SOBRENOME || !EMAIL || !ID_GRUPO || !ID_LICENCA || !ID_SITUACAO || !SENHA) {
         res.status(400).json('valores nulos não são aceitos');
         return
     }
+
+    const data = dataAgora()
 
     const newUser = await TB_USUARIOS.create({
         NOME,
@@ -59,14 +62,16 @@ export const CREATE_USUARIO = async (req: Request, res: Response) => {
         ID_GRUPO,
         ID_LICENCA,
         ID_SITUACAO,
-        ULTIMO_PAGAMENTO_LICENCA,
-        SENHA
+        ULTIMO_PAGAMENTO_LICENCA: data,
+        SENHA,
+        PROXIMO_VENCIMENTO_LICENCA: data
     }).catch((err) => {
         if (err.name === 'SequelizeUniqueConstraintError') {
             res.status(400).json(`email já está cadastrado no sistema!`);
             return
         } else {
-            res.status(500).json('algo de errado com o servidor, tente novamente mais tarde, caso permaneça entre em contato com o suporte!');
+            res.json(err)
+            //res.status(500).json('algo de errado com o servidor, tente novamente mais tarde, caso permaneça entre em contato com o suporte!');
             return
         };
     });
@@ -137,13 +142,14 @@ export const EDIT_SITUACAO_USUARIO = async (req: Request, res: Response) => {
 };
 
 export const ATT_PAGAMENTO_USUARIO = async (req: Request, res: Response) => {
-    const { ID_USUARIO, NEW_DATA } = req.body;
-    if (!ID_USUARIO || !NEW_DATA) {
+    const { ID_USUARIO } = req.body;
+    if (!ID_USUARIO) {
         res.status(400).json('valores nulos não são aceitos')
         return
     }
 
-    const affectedRows = await TB_USUARIOS.update({ ULTIMO_PAGAMENTO_LICENCA: NEW_DATA }, { where: { ID_USUARIO } })
+
+    const affectedRows = await TB_USUARIOS.update({ ULTIMO_PAGAMENTO_LICENCA: dataAgora() }, { where: { ID_USUARIO } })
     if (affectedRows) {
         if (affectedRows[0] > 0) {
             res.status(200).json('Pagamento confirmado! e data alterada!')

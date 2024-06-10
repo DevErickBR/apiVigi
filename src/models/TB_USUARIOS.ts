@@ -9,7 +9,12 @@ interface USUARIO extends Model {
     NOME: string;
     SOBRENOME: string;
     EMAIL: string;
+    ID_GRUPO: number;
+    ID_LICENCA: number;
+    ID_SITUACAO: number;
+    ULTIMO_PAGAMENTO_LICENCA: Date;
     SENHA: string;
+    PROXIMO_VENCIMENTO_LICENCA: Date
 }
 
 export const TB_USUARIOS = sequelize.define<USUARIO>('TB_USUARIOS', {
@@ -33,37 +38,44 @@ export const TB_USUARIOS = sequelize.define<USUARIO>('TB_USUARIOS', {
         unique: true
     },
     ID_GRUPO: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         references: {
             model: TB_GRUPOS,
             key: 'ID_GRUPO'
         }
     },
     ID_LICENCA: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         references: {
             model: TB_LICENCAS,
             key: 'ID_LICENCA'
         }
     },
     ID_SITUACAO: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         references: {
             model: TB_SITUACOES,
             key: 'ID_SITUACAO'
         },
     },
     ULTIMO_PAGAMENTO_LICENCA: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     SENHA: {
         type: DataTypes.CHAR(45),
         allowNull: false
     },
+    PROXIMO_VENCIMENTO_LICENCA: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    }
+
 },
     {
         tableName: 'TB_USUARIOS',
         timestamps: false,
+        hasTrigger: true
     }
 )
+

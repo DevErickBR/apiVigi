@@ -107,13 +107,13 @@ export const DEL_LICENCA = async (req: Request, res: Response) => {
 // -------------------
 
 export const EDIT_LICENCA = async (req: Request, res: Response) => {
-    const { ID_LICENCA, NEW_NOME } = req.body;
+    const { ID_LICENCA, NEW_NOME, DURACAO_DIAS } = req.body;
     if (!ID_LICENCA || !NEW_NOME) {
         res.status(400).json('valores nulos não são aceitos!');
         return;
     };
 
-    const editLicenca = await TB_LICENCAS.update({ NOME_LICENCA: NEW_NOME }, { where: { ID_LICENCA } }).catch((err) => {
+    const editLicenca = await TB_LICENCAS.update({ NOME_LICENCA: NEW_NOME, DURACAO_DIAS: DURACAO_DIAS }, { where: { ID_LICENCA } }).catch((err) => {
         if (err.name === 'SequelizeUniqueConstraintError') {
             res.status(400).json(`a licença ${NEW_NOME} já está cadastrada no sistema!`)
             return;
