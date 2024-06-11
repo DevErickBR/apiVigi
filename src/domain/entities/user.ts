@@ -1,63 +1,66 @@
-import { LicenceRepository } from './../../application/repositories/licence-duration';
-import { FindDueDate } from '../../application/utils/get-due-date';
-import { InMemoryLicencesRepository } from '../../tests/repositories/in-memory-licences-repositories';
-
 export interface UserProps {
-    ID_USUARIO?: number;
-    NOME: string;
-    SOBRENOME: string;
+    ID_USER: string;
+    NAME: string;
+    LASTNAME: string;
     EMAIL: string;
-    ID_GRUPO: number;
-    ID_LICENCA: number;
-    ID_SITUACAO: number;
-    ULTIMO_PAGAMENTO_LICENCA?: Date;
-    PROXIMO_VENCIMENTO_LICENCA?: Date;
-    SENHA: string;
+    PASSWORD: string;
+    ID_SITUATION: number;
+    ID_LICENCE: number;
+    LASTED_PAYMENT: Date;
+    DUE_DATE?: Date;
 }
 
 export class User {
-    constructor(
-        private props: UserProps,
-        private licenceRepository: LicenceRepository,
-    ) {}
+    private props: UserProps;
 
-    get email() {
-        return this.props.EMAIL;
+    constructor(props: UserProps) {
+        this.props = {
+            ...props,
+            LASTED_PAYMENT: props.LASTED_PAYMENT ?? new Date(),
+        };
     }
 
-    async create(props: UserProps) {
-        const licenceRepo = new InMemoryLicencesRepository();
-        const licence = await this.licenceRepository.findById(props.ID_LICENCA);
-
-        if (!licence) {
-            throw new Error('user not on licence');
+    get id(): string {
+        return this.props.ID_USER;
+    }
+    get name(): string {
+        return this.props.NAME;
+    }
+    get lastname(): string {
+        return this.props.LASTNAME;
+    }
+    get email(): string {
+        return this.props.EMAIL;
+    }
+    get password(): string {
+        return this.props.PASSWORD;
+    }
+    get idSituation(): number {
+        return this.props.ID_SITUATION;
+    }
+    get idLicence(): number {
+        return this.props.ID_LICENCE;
+    }
+    get lastedPayment(): Date {
+        return this.props.LASTED_PAYMENT;
+    }
+    get dueDate(): Date {
+        if (this.props.DUE_DATE) {
+            return this.props.DUE_DATE;
         }
-        const ultimoPagLicenca = props.ULTIMO_PAGAMENTO_LICENCA ?? new Date();
 
-        const findDueDate = new FindDueDate(licenceRepo);
-        const dueDate = await findDueDate.calcDueDate(
-            ultimoPagLicenca,
-            props.ID_LICENCA,
-        );
+        return this.props.LASTED_PAYMENT;
+    }
 
-        if (!dueDate) {
-            throw new Error('Date Null!');
-        }
+    updatePayment(paymentDate: Date): void {
+        this.props.LASTED_PAYMENT = paymentDate;
+    }
 
-        const proximoVencimentoLicenca =
-            props.PROXIMO_VENCIMENTO_LICENCA ?? dueDate;
+    updateDueDate(dueDate: Date): void {
+        this.props.DUE_DATE = dueDate;
+    }
 
-        if (proximoVencimentoLicenca <= ultimoPagLicenca) {
-            throw new Error('cannot register due date before date start');
-        }
-
-        const user = new User(
-            {
-                ...props,
-            },
-            licenceRepo,
-        );
-
-        return user;
+    updatePassword(hashedPassword: string): void {
+        this.props.PASSWORD = hashedPassword;
     }
 }

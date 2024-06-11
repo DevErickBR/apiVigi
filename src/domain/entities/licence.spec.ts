@@ -2,13 +2,13 @@ import { describe, it, expect } from 'vitest';
 import { Licence } from './licence';
 
 describe('Create Licence with entities', () => {
-    it('Shound be able create an user', () => {
-        const newLicence = Licence.create({
-            ID_LICENCA: 1,
-            DURACAO_DIAS: 30,
-            NOME_LICENCA: 'teste',
+    it('Shound be able create an licence', () => {
+        const licence = new Licence({
+            ID_LICENCE: 1,
+            NAME_LICENCE: 'test',
+            DURATION_DAYS: 30,
         });
 
-        expect(newLicence).instanceOf(Licence);
+        expect(licence).instanceOf(Licence);
     });
 });

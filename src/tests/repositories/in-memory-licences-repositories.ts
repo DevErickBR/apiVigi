@@ -1,15 +1,15 @@
-import { LicenceRepository } from '../../application/repositories/licence-duration';
+import { LicenceRepository } from '../../application/repositories/licence-repository';
 
 import { Licence } from '../../domain/entities/licence';
 
 export class InMemoryLicencesRepository implements LicenceRepository {
-    public items: Licence[] = [];
+    public licences: Licence[] = [];
 
-    async findById(id: number): Promise<Licence | null> {
-        const licence = this.items.find((licence) => licence.getId === id);
+    async findById(id: number): Promise<Licence | Error> {
+        const licence = this.licences.find((licence) => licence.id === id);
 
         if (licence == undefined) {
-            return null;
+            throw new Error('dont exist License');
         }
 
         return licence;

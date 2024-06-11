@@ -1,31 +1,21 @@
-import { LicenceRepository } from './../repositories/licence-duration';
-
 export interface DueDateProps {
     dueDate: Date;
+    calDueDate(): Date;
 }
 
 export class FindDueDate {
-    constructor(private licenceRepository: LicenceRepository) {}
+    constructor(private props: DueDateProps) {}
 
-    async calcDueDate(
-        startDate: Date,
-        idLicence: number,
-    ): Promise<string | null> {
-        const date = new Date(startDate);
-        const licence = await this.licenceRepository.findById(idLicence);
+    static async CalcDueDate(lastedPayment: Date, duration: number) {
+        const dueDate = lastedPayment;
+        const resultDueDate = new Date(
+            dueDate.setDate(dueDate.getDate() + duration),
+        );
 
-        if (licence) {
-            date.setDate(date.getDate() + licence.getDuration);
-
-            const result = date.toJSON().slice(0, 10);
-
-            if (date <= startDate) {
-                throw new Error('Due Date Invalid');
-            }
-
-            return result;
+        if (resultDueDate < lastedPayment) {
+            throw new Error('cannot register due date smaller last payment');
         }
 
-        throw new Error('values null not accept');
+        return resultDueDate;
     }
 }

@@ -1,32 +1,26 @@
-import { UserEmailRepository } from './../repositories/user-email-repository';
+import { randomUUID } from 'crypto';
 import { User } from '../../domain/entities/user';
 
 interface CreateUserRequest {
-    ID_USUARIO?: number;
-    NOME: string;
-    SOBRENOME: string;
+    ID_USER?: string;
+    NAME: string;
+    LASTNAME: string;
     EMAIL: string;
-    ID_GRUPO: number;
-    ID_LICENCA: number;
-    ID_SITUACAO: number;
-    ULTIMO_PAGAMENTO_LICENCA?: Date;
-    PROXIMO_VENCIMENTO_LICENCA?: Date;
-    SENHA: string;
+    PASSWORD: string;
+    ID_SITUATION: number;
+    ID_LICENCE: number;
+    LASTED_PAYMENT?: Date;
+    DUE_DATE?: Date;
 }
 
-type CreateUserResponse = Promise<User | null>;
+type CreateUserResponse = Promise<User | Error>;
 
-export class CreateUser {
-    constructor(private userEmailRepository: UserEmailRepository) {}
+export class CreateUse {
+    constructor(private props: CreateUserRequest) {}
 
-    async execute(props: CreateUserRequest): CreateUserResponse {
-        const email = await this.userEmailRepository.findByEmail(props.EMAIL);
-
-        if (email) {
-            throw new Error('not possible create user, because email in use.');
+    execute(props: CreateUserRequest) {
+        if (!props.ID_USER) {
+            this.props.ID_USER = randomUUID();
         }
-
-        const user = User.create(props);
-        return user;
     }
 }

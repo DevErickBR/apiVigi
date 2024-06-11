@@ -1,23 +1,28 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { GetLicence } from './get-licence';
 import { InMemoryLicencesRepository } from '../../tests/repositories/in-memory-licences-repositories';
 import { Licence } from '../../domain/entities/licence';
-import { GetLicence } from './get-licence';
 
-describe('Get Licence with use case', () => {
-    it('shoul be able find one licence', async () => {
+describe('Get Licence use case', () => {
+    it('should be able dont find an licence', async () => {
         const licenceRepository = new InMemoryLicencesRepository();
-        const licence = Licence.create({
-            ID_LICENCA: 1,
-            NOME_LICENCA: 'test',
-            DURACAO_DIAS: 30,
-        });
+        const resultLicence = new GetLicence(licenceRepository);
+        expect(() => resultLicence.getLicence(1)).rejects.toThrow(
+            'dont exist License',
+        );
+    });
 
-        licenceRepository.items.push(licence);
-
-        const sut = new GetLicence(licenceRepository);
-        const response = await sut.execute({
-            ID_LICENCA: 1,
+    it('shound be able find an licence', async () => {
+        const licenceRepository = new InMemoryLicencesRepository();
+        const licence = new Licence({
+            ID_LICENCE: 1,
+            DURATION_DAYS: 30,
+            NAME_LICENCE: 'test',
         });
-        expect(response).instanceOf(Licence);
+        licenceRepository.licences.push(licence);
+        const resultLicence = new GetLicence(licenceRepository);
+        const result = await resultLicence.getLicence(1);
+
+        expect(result).toEqual(licence);
     });
 });

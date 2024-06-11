@@ -20,6 +20,7 @@
     "mysql2": "^3.9.8",
     "nodemon": "^3.1.1",
     "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6",
     "tedious": "^18.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
