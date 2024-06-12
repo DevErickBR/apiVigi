@@ -8,8 +8,9 @@ export class FindDueDate {
 
     static async CalcDueDate(lastedPayment: Date, duration: number) {
         const dueDate = lastedPayment;
+        const result = new Date();
         const resultDueDate = new Date(
-            dueDate.setDate(dueDate.getDate() + duration),
+            result.setDate(dueDate.getDate() + duration),
         );
 
         if (resultDueDate < lastedPayment) {

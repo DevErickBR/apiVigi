@@ -6,10 +6,9 @@ import { Licence } from '../../domain/entities/licence';
 describe('Get Licence use case', () => {
     it('should be able dont find an licence', async () => {
         const licenceRepository = new InMemoryLicencesRepository();
-        const resultLicence = new GetLicence(licenceRepository);
-        expect(() => resultLicence.getLicence(1)).rejects.toThrow(
-            'dont exist License',
-        );
+        const Licence = new GetLicence(licenceRepository);
+        const result = await Licence.getLicence(1);
+        expect(result).toBeNull();
     });
 
     it('shound be able find an licence', async () => {
@@ -21,7 +20,7 @@ describe('Get Licence use case', () => {
         });
         licenceRepository.licences.push(licence);
         const resultLicence = new GetLicence(licenceRepository);
-        const result = await resultLicence.getLicence(1);
+        const result = await resultLicence.getLicence(licence.id);
 
         expect(result).toEqual(licence);
     });

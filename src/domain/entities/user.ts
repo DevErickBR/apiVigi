@@ -11,12 +11,15 @@ export interface UserProps {
 }
 
 export class User {
-    private props: UserProps;
+    constructor(private props: UserProps) {
+        const dueDate = props.DUE_DATE ?? new Date();
 
-    constructor(props: UserProps) {
+        if (props.DUE_DATE! < props.LASTED_PAYMENT) {
+            throw new Error('due date smaller last payment');
+        }
         this.props = {
             ...props,
-            LASTED_PAYMENT: props.LASTED_PAYMENT ?? new Date(),
+            DUE_DATE: dueDate,
         };
     }
 

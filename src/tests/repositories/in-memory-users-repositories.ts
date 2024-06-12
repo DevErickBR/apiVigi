@@ -1,16 +1,30 @@
 import { User } from '../../domain/entities/user';
-import { UserEmailRepository } from '../../application/repositories/user-email-repository';
+import { UserRepository } from '../../application/repositories/user-repository';
 
-export class InMemoryUsersRepository implements UserEmailRepository {
+export class InMemoryUsersRepository implements UserRepository {
     public items: User[] = [];
 
     async findByEmail(email: string): Promise<User | null> {
         const user = this.items.find((user) => user.email == email);
 
-        if (user === undefined) {
-            return null;
+        if (user) {
+            return user;
         }
 
-        return user;
+        return null;
+    }
+
+    async findById(id: string): Promise<User | null> {
+        const user = this.items.find((user) => user.id === id);
+
+        if (user) {
+            return user;
+        }
+
+        return null;
+    }
+
+    async save(user: User): Promise<void> {
+        this.items.push(user);
     }
 }
