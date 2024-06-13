@@ -56,7 +56,7 @@ export class CreateUser {
 
         const userProps: UserProps = {
             ID_USER: userId,
-            DUE_DATE: dueDate.toString || new Date(),
+            DUE_DATE: dueDate,
             ...props,
         };
 
