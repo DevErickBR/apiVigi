@@ -8,7 +8,9 @@ export class FindDueDate {
 
     static async CalcDueDate(lastedPayment: Date, duration: number) {
         const dueDate = lastedPayment;
+
         const result = new Date();
+
         const resultDueDate = new Date(
             result.setDate(dueDate.getDate() + duration),
         );
@@ -17,6 +19,10 @@ export class FindDueDate {
             throw new Error('cannot register due date smaller last payment');
         }
 
-        return resultDueDate;
+        if (!isNaN(lastedPayment.getTime())) {
+            return resultDueDate;
+        }
+
+        throw new Error('invalid date,plase, review your params');
     }
 }

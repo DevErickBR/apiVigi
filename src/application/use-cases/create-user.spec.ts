@@ -33,7 +33,7 @@ describe('Create user with use case', () => {
         expect(newUser.dueDate).toBeDefined();
     });
 
-    it('should be able create an user case not inform props id', async () => {
+    it('should be able create an user case not inform params id', async () => {
         const usersRepo = new InMemoryUsersRepository();
         const licenceRepo = new InMemoryLicencesRepository();
         const createUser = new CreateUser(usersRepo, licenceRepo);
@@ -59,7 +59,7 @@ describe('Create user with use case', () => {
         expect(newUser.dueDate).toBeDefined();
     });
 
-    it('should be able deny creation of a user case ID already exist', async () => {
+    it('should be able deny creation of a user, case ID already exist', async () => {
         const usersRepo = new InMemoryUsersRepository();
         const licenceRepo = new InMemoryLicencesRepository();
         const createUser = new CreateUser(usersRepo, licenceRepo);
@@ -81,5 +81,69 @@ describe('Create user with use case', () => {
         expect(
             async () => await createUser.execute(userRequest),
         ).rejects.toThrow('ID already exist');
+    });
+
+    it('should be able deny creation of a user, case EMAIL already exist', async () => {
+        const usersRepo = new InMemoryUsersRepository();
+        const licenceRepo = new InMemoryLicencesRepository();
+        const createUser = new CreateUser(usersRepo, licenceRepo);
+
+        const userRequest = {
+            NAME: 'fulano',
+            LASTNAME: 'cliclano',
+            EMAIL: 'fulano@cliclano.com',
+            ID_LICENCE: 99,
+            ID_SITUATION: 1,
+            PASSWORD: '123456789',
+            LASTED_PAYMENT: new Date(),
+        };
+
+        const newUser = await createUser.execute(userRequest);
+        usersRepo.items.push(newUser);
+
+        expect(
+            async () => await createUser.execute(userRequest),
+        ).rejects.toThrow('Email already registeresd');
+    });
+
+    it('should be able deny creation of a use, case LICENCE not exist', async () => {
+        const usersRepo = new InMemoryUsersRepository();
+        const licenceRepo = new InMemoryLicencesRepository();
+        const createUser = new CreateUser(usersRepo, licenceRepo);
+
+        const userRequest = {
+            NAME: 'fulano',
+            LASTNAME: 'cliclano',
+            EMAIL: 'fulano@exemple.com',
+            ID_LICENCE: 1,
+            ID_SITUATION: 1,
+            PASSWORD: '123456789',
+            LASTED_PAYMENT: new Date(),
+        };
+
+        expect(
+            async () => await createUser.execute(userRequest),
+        ).rejects.toThrow('licence dont exist!');
+    });
+
+    it('should be able deny creation of a use, case an DUE DATE invalid or smaller LASTPAYMENT', async () => {
+        const usersRepo = new InMemoryUsersRepository();
+        const licenceRepo = new InMemoryLicencesRepository();
+        const createUser = new CreateUser(usersRepo, licenceRepo);
+
+        const userRequest = {
+            NAME: 'fulano',
+            LASTNAME: 'cliclano',
+            EMAIL: 'fulano@exemple.com',
+            ID_LICENCE: 99,
+            ID_SITUATION: 1,
+            PASSWORD: '123456789',
+            LASTED_PAYMENT: new Date(),
+            DUE_DATE: new Date('24-01-01'), // invalid date inserting
+        };
+
+        expect(
+            async () => await createUser.execute(userRequest),
+        ).rejects.toThrow();
     });
 });

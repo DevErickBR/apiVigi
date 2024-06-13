@@ -36,6 +36,12 @@ export class CreateUser {
             }
         }
 
+        if (props.DUE_DATE) {
+            if (isNaN(props.DUE_DATE.getDate())) {
+                throw new Error('invalid date,plase, review your params');
+            }
+        }
+
         const licence = await this.licenceRepository.findById(props.ID_LICENCE);
 
         if (!licence) {
@@ -45,11 +51,12 @@ export class CreateUser {
             props.LASTED_PAYMENT,
             licence.duration,
         );
+
         const userId = props.ID_USER || randomUUID();
 
         const userProps: UserProps = {
             ID_USER: userId,
-            DUE_DATE: dueDate,
+            DUE_DATE: dueDate.toString || new Date(),
             ...props,
         };
 

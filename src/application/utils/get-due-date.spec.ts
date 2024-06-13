@@ -13,4 +13,9 @@ describe('Calculate due date', () => {
             'cannot register due date smaller last payment',
         );
     });
+    it('shound be able deny an due date if invalid date', async () => {
+        expect(
+            FindDueDate.CalcDueDate(new Date('24-01-01'), 40),
+        ).rejects.toThrow('invalid date,plase, review your params');
+    });
 });
