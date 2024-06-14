@@ -144,6 +144,6 @@ describe('Create user with use case', () => {
 
         expect(
             async () => await createUser.execute(userRequest),
-        ).rejects.toThrow();
+        ).rejects.toThrow('invalid date,plase, review your params');
     });
 });

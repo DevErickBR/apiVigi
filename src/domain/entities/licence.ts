@@ -1,5 +1,5 @@
 export interface LicenceProps {
-    ID_LICENCE: number;
+    ID_LICENCE?: number;
     NAME_LICENCE: string;
     DURATION_DAYS: number;
 }
@@ -9,15 +9,15 @@ export class Licence {
         this.props = props;
     }
 
-    get id() {
+    public get id() {
         return this.props.ID_LICENCE;
     }
 
-    get name() {
+    public get name() {
         return this.props.NAME_LICENCE;
     }
 
-    get duration() {
+    public get duration() {
         return this.props.DURATION_DAYS;
     }
 

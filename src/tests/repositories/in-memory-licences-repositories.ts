@@ -19,4 +19,13 @@ export class InMemoryLicencesRepository implements LicenceRepository {
 
         return null;
     }
+
+    async findByName(name: string): Promise<Licence | null> {
+        const licence = this.licences.find((licence) => licence.name === name);
+        if (licence) {
+            return licence;
+        }
+
+        return null;
+    }
 }

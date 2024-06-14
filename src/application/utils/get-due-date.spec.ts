@@ -5,7 +5,10 @@ describe('Calculate due date', () => {
     it('shound be able calculate due date', async () => {
         const nowDate = new Date();
         const duration = 40;
+        const result = await FindDueDate.CalcDueDate(nowDate, duration);
+
         expect(FindDueDate.CalcDueDate(nowDate, duration)).resolves;
+        expect(result).instanceOf(Date);
     });
 
     it('shound be able deny an due date smaller lasted payment ', async () => {
