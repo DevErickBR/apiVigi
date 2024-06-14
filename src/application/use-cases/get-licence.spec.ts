@@ -8,10 +8,18 @@ describe('Get Licence use case', () => {
         const licenceRepository = new InMemoryLicencesRepository();
         const Licence = new GetLicence(licenceRepository);
         const result = await Licence.getLicence(1);
-        expect(result).toBeNull();
+        expect(result.isLeft()).toBe(true);
+        if (result.isLeft()) {
+            expect(result.value.message).toBe('licence not exist');
+        }
     });
 
     it('shound be able find an licence', async () => {
+        const licenceProps = {
+            ID_LICENCE: 1,
+            DURATION_DAYS: 30,
+            NAME_LICENCE: 'test',
+        };
         const licenceRepository = new InMemoryLicencesRepository();
         const licence = new Licence({
             ID_LICENCE: 1,
@@ -20,8 +28,14 @@ describe('Get Licence use case', () => {
         });
         licenceRepository.licences.push(licence);
         const resultLicence = new GetLicence(licenceRepository);
-        const result = await resultLicence.getLicence(licence.id);
+        const result = await resultLicence.getLicence(licence.id!);
 
-        expect(result).toEqual(licence);
+        expect(result.isRight()).toBe(true);
+        if (result.isRight()) {
+            expect(result.value).instanceOf(Licence);
+            expect(result.value.name).toBe(licenceProps.NAME_LICENCE);
+            expect(result.value.duration).toBe(licenceProps.DURATION_DAYS);
+            expect(result.value.id).toBe(licenceProps.ID_LICENCE);
+        }
     });
 });
