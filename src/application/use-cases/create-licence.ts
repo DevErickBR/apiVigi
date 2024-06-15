@@ -38,7 +38,7 @@ export class CreateLicence {
 
         const id = props.ID_LICENCE || undefined;
         const licence = new Licence({ ID_LICENCE: id, ...props });
-
+        this.licenceRepository.save(licence);
         return right(licence);
     }
 }

@@ -28,4 +28,8 @@ export class InMemoryLicencesRepository implements LicenceRepository {
 
         return null;
     }
+
+    async save(licence: Licence): Promise<void> {
+        this.licences.push(licence);
+    }
 }

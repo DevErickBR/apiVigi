@@ -8,8 +8,6 @@ export interface DueDateProps {
 type Response = Either<Error, Date>;
 
 export class FindDueDate {
-    constructor(private props: DueDateProps) {}
-
     static CalcDueDate(lastedPayment: Date, duration: number): Response {
         const dueDate = lastedPayment;
 

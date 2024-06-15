@@ -17,6 +17,7 @@ export class User {
         if (props.DUE_DATE! < props.LASTED_PAYMENT) {
             throw new Error('due date smaller last payment');
         }
+
         this.props = {
             ...props,
             DUE_DATE: dueDate,
@@ -65,5 +66,25 @@ export class User {
 
     updatePassword(hashedPassword: string): void {
         this.props.PASSWORD = hashedPassword;
+    }
+
+    updateName(name: string) {
+        this.props.NAME = name;
+    }
+
+    updateLastname(lastname: string) {
+        this.props.LASTNAME = lastname;
+    }
+
+    updateLicence(licence: number) {
+        this.props.ID_LICENCE = licence;
+    }
+
+    updateSituation(situation: number) {
+        this.props.ID_SITUATION = situation;
+    }
+
+    updateEmail(email: string) {
+        this.props.EMAIL = email;
     }
 }
