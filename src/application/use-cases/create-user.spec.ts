@@ -23,6 +23,7 @@ describe('Create user with use case', () => {
         };
 
         const newUser = await createUser.execute(userRequest);
+
         expect(newUser.isRight()).toBe(true);
         if (newUser.isRight()) {
             expect(
