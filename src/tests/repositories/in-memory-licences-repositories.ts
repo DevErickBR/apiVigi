@@ -11,6 +11,7 @@ export class InMemoryLicencesRepository implements LicenceRepository {
             NAME_LICENCE: 'test',
         });
         this.licences.push(newLicence);
+
         const licence = this.licences.find((licence) => licence.id === id);
 
         if (licence) {
@@ -27,5 +28,9 @@ export class InMemoryLicencesRepository implements LicenceRepository {
         }
 
         return null;
+    }
+
+    async save(licence: Licence): Promise<void> {
+        this.licences.push(licence);
     }
 }

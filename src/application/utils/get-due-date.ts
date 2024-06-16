@@ -1,12 +1,14 @@
+import { Either, left, right } from '../../domain/errors/either';
+
 export interface DueDateProps {
     dueDate: Date;
     calDueDate(): Date;
 }
 
-export class FindDueDate {
-    constructor(private props: DueDateProps) {}
+type Response = Either<Error, Date>;
 
-    static async CalcDueDate(lastedPayment: Date, duration: number) {
+export class FindDueDate {
+    static CalcDueDate(lastedPayment: Date, duration: number): Response {
         const dueDate = lastedPayment;
 
         const result = new Date();
@@ -16,13 +18,15 @@ export class FindDueDate {
         );
 
         if (resultDueDate < lastedPayment) {
-            throw new Error('cannot register due date smaller last payment');
+            return left(
+                new Error('cannot register due date smaller last payment'),
+            );
         }
 
         if (!isNaN(lastedPayment.getTime())) {
-            return resultDueDate;
+            return right(resultDueDate);
         }
 
-        throw new Error('invalid date,plase, review your params');
+        return left(new Error('invalid date,plase, review your params'));
     }
 }

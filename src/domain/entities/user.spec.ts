@@ -1,5 +1,5 @@
-import { expect, describe, it } from 'vitest';
-import { User } from './user';
+import { expect, describe, it, beforeEach } from 'vitest';
+import { User, UserProps } from './user';
 import { randomUUID } from 'crypto';
 
 describe('Create User with entities', () => {
@@ -44,5 +44,79 @@ describe('Create User with entities', () => {
                     DUE_DATE: new Date('2024-01-01'),
                 }),
         ).toThrow('due date smaller last payment');
+    });
+});
+
+describe('Update metods user', () => {
+    let userProps: UserProps;
+
+    beforeEach(() => {
+        userProps = {
+            ID_USER: randomUUID(),
+            NAME: 'fulano',
+            LASTNAME: 'cliclano',
+            EMAIL: 'fulano@cliclano.com',
+            ID_LICENCE: 1,
+            ID_SITUATION: 1,
+            PASSWORD: '123456789',
+            LASTED_PAYMENT: new Date(),
+        };
+    });
+
+    it('should be able update the user name', () => {
+        const user = new User(userProps);
+
+        user.updateName('erick');
+        expect(user.name).toBe('erick');
+    });
+
+    it('should be able update the user lastname ', () => {
+        const user = new User(userProps);
+
+        user.updateLastname('doe');
+        expect(user.lastname).toBe('doe');
+    });
+
+    it('should be able update the user email ', () => {
+        const user = new User(userProps);
+
+        user.updateEmail('erickdoe@email.com');
+        expect(user.email).toBe('erickdoe@email.com');
+    });
+
+    it('should be able update the user situation ', () => {
+        const user = new User(userProps);
+
+        user.updateSituation(2);
+        expect(user.idSituation).toBe(2);
+    });
+
+    it('should be able update the user licence ', () => {
+        const user = new User(userProps);
+
+        user.updateLicence(2);
+        expect(user.idLicence).toBe(2);
+    });
+
+    it('should be able update the user payment ', () => {
+        const user = new User(userProps);
+        const lastPayment = new Date('2024-01-01');
+        user.updatePayment(lastPayment);
+        expect(user.lastedPayment).toBe(lastPayment);
+    });
+
+    it('should be able update the user password ', () => {
+        const user = new User(userProps);
+
+        user.updatePassword('52366');
+        expect(user.password).toBe('52366');
+    });
+
+    it('should be able update the user due date ', () => {
+        const user = new User(userProps);
+
+        const dueDate = new Date('2024-01-01');
+        user.updateDueDate(dueDate);
+        expect(user.dueDate).toBe(dueDate);
     });
 });
