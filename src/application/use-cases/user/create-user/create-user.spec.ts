@@ -1,10 +1,10 @@
 import { it, describe, expect } from 'vitest';
 import { randomUUID } from 'crypto';
 import { CreateUser } from './create-user';
-import { InMemoryUsersRepository } from '../../tests/repositories/in-memory-users-repositories';
-import { User } from '../../domain/entities/user';
-import { InMemoryLicencesRepository } from '../../tests/repositories/in-memory-licences-repositories';
-import { Hash } from '../../security/hash-password';
+import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories';
+import { User } from '../../../../domain/entities/user';
+import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories';
+import { Hash } from '../../../../security/hash-password';
 
 describe('Create user with use case', () => {
     it('should be able create an user', async () => {

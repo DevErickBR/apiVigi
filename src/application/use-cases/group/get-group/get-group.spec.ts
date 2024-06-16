@@ -1,5 +1,5 @@
-import { Group } from '../../domain/entities/group';
-import { InMemoruGroupRepository } from '../../tests/repositories/in-memory-groups-repositories';
+import { Group } from '../../../../domain/entities/group';
+import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories';
 import { GetGroup } from './get-group';
 import { it, describe, expect } from 'vitest';
 

@@ -3,6 +3,7 @@ import { GroupRepository } from './../../application/repositories/group-reposito
 
 export class InMemoruGroupRepository implements GroupRepository {
     public groups: Group[] = [];
+
     async findById(id: number): Promise<Group | null> {
         const group = this.groups.find((group) => group.id === id);
 

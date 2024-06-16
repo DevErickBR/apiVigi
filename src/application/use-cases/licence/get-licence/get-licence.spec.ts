@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { GetLicence } from './get-licence';
-import { InMemoryLicencesRepository } from '../../tests/repositories/in-memory-licences-repositories';
-import { Licence } from '../../domain/entities/licence';
+import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories';
+import { Licence } from '../../../../domain/entities/licence';
 
 describe('Get Licence use case', () => {
     it('should be able dont find an licence, case ID not exist', async () => {

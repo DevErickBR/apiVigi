@@ -1,11 +1,11 @@
-import { right } from './../../domain/errors/either';
-import { LicenceRepository } from './../repositories/licence-repository';
-import { UserRepository } from './../repositories/user-repository';
+import { right } from '../../../../domain/errors/either';
+import { LicenceRepository } from '../../../repositories/licence-repository';
+import { UserRepository } from '../../../repositories/user-repository';
 import { randomUUID } from 'crypto';
-import { User, UserProps } from '../../domain/entities/user';
-import { FindDueDate } from '../utils/get-due-date';
-import { Either, left } from '../../domain/errors/either';
-import { Hash } from '../../security/hash-password';
+import { User, UserProps } from '../../../../domain/entities/user';
+import { FindDueDate } from '../../../utils/get-due-date';
+import { Either, left } from '../../../../domain/errors/either';
+import { Hash } from '../../../../security/hash-password';
 
 interface CreateUserRequest {
     ID_USER?: string;

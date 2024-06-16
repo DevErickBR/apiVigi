@@ -1,7 +1,7 @@
 import { it, describe, expect } from 'vitest';
 import { CreateLicence } from './create-licence';
-import { InMemoryLicencesRepository } from '../../tests/repositories/in-memory-licences-repositories';
-import { Licence } from '../../domain/entities/licence';
+import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories';
+import { Licence } from '../../../../domain/entities/licence';
 
 describe('Create Licence with use case', () => {
     it('should be able create an licence', async () => {

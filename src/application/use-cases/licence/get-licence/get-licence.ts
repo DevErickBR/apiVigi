@@ -1,6 +1,6 @@
-import { Licence } from '../../domain/entities/licence';
-import { Either, left, right } from '../../domain/errors/either';
-import { LicenceRepository } from './../repositories/licence-repository';
+import { Licence } from '../../../../domain/entities/licence';
+import { Either, left, right } from '../../../../domain/errors/either';
+import { LicenceRepository } from '../../../repositories/licence-repository';
 
 type Response = Either<Error, Licence>;
 
