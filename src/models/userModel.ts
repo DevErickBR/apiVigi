@@ -6,9 +6,11 @@ import {
     DataType,
     ForeignKey,
     BelongsTo,
+    HasMany,
 } from 'sequelize-typescript';
 import { LicenceModel } from './licenceModel';
 import { SituationModel } from './situationModel';
+import { AssocGroupUserModel } from './assoc-group-userModel';
 
 @Table({
     tableName: 'TB_USERS',
@@ -72,4 +74,7 @@ export class UserModel extends Model<UserModel> {
         allowNull: false,
     })
     DUE_DATE!: Date;
+
+    @HasMany(() => AssocGroupUserModel)
+    AssocGroupUser!: AssocGroupUserModel;
 }
