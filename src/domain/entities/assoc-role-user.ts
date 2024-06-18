@@ -1,5 +1,5 @@
-interface AssocRoleUserProps {
-    ID_ROLE?: number;
+export interface AssocRoleUserProps {
+    ID_ROLE: number;
     ID_USER: string;
 }
 

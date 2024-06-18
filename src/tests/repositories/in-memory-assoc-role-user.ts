@@ -1,29 +1,32 @@
-import { AssocRoleUserRepository } from "../../application/repositories/assoc-role-user";
-import { AssocRoleUser } from "../../domain/entities/assoc-role-user";
+import { AssocRoleUserRepository } from '../../application/repositories/assoc-role-user-repository';
+import { AssocRoleUser } from '../../domain/entities/assoc-role-user';
 
 export class InMemoryAssocRoleUser implements AssocRoleUserRepository {
-    public assocs: AssocRoleUser[] = []
+    public assocs: AssocRoleUser[] = [];
 
     async findByAssoc(assoc: AssocRoleUser): Promise<AssocRoleUser | null> {
-        const result = this.assocs.find((props) => props.getIdRole === assoc.getIdRole && props.getIdUser === assoc.getIdUser)
+        const result = this.assocs.find(
+            (props) =>
+                props.getIdRole === assoc.getIdRole &&
+                props.getIdUser === assoc.getIdUser,
+        );
 
-        return result ?? null
+        return result ?? null;
     }
 
     async findByRole(id: number): Promise<AssocRoleUser | null> {
-        const result = this.assocs.find((props) => props.getIdRole === id)
+        const result = this.assocs.find((props) => props.getIdRole === id);
 
-        return result ?? null
+        return result ?? null;
     }
 
     async findByUser(id: string): Promise<AssocRoleUser | null> {
-        const result = this.assocs.find((props) => props.getIdUser === id)
+        const result = this.assocs.find((props) => props.getIdUser === id);
 
-        return result ?? null
+        return result ?? null;
     }
 
     async save(assoc: AssocRoleUser): Promise<void> {
         this.assocs.push(assoc);
-
     }
 }
