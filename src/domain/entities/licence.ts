@@ -25,7 +25,7 @@ export class Licence {
         this.props.DURATION_DAYS = days;
     }
 
-    updateName(name: string) {
-        this.props.NAME_LICENCE = name;
+    updateDescription(description: string) {
+        this.props.NAME_LICENCE = description;
     }
 }

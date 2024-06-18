@@ -114,7 +114,6 @@ describe('Update metods user', () => {
 
     it('should be able update the user due date ', () => {
         const user = new User(userProps);
-
         const dueDate = new Date('2024-01-01');
         user.updateDueDate(dueDate);
         expect(user.dueDate).toBe(dueDate);

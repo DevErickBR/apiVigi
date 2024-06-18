@@ -13,4 +13,8 @@ export class Role {
     get description() {
         return this.props.DESCRIPTION;
     }
+
+    updateDescription(description: string) {
+        this.props.DESCRIPTION = description;
+    }
 }

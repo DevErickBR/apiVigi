@@ -30,6 +30,8 @@ describe('Create an Association between user the group', () => {
             LASTED_PAYMENT: new Date(),
         });
 
+        console.log(Object.keys(user));
+
         const group = new Group({ DESCRIPTION: 'test', ID_GROUP: 1 });
         userRepo.save(user);
         groupRepo.save(group);
