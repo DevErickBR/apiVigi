@@ -1,8 +1,6 @@
+import { UpdateUserProps } from './../../application/use-cases/user/update-user/update-user';
 import { User } from '../../domain/entities/user';
-import {
-    UpdateUserProps,
-    UserRepository,
-} from '../../application/repositories/user-repository';
+import { UserRepository } from '../../application/repositories/user-repository';
 
 export class InMemoryUsersRepository implements UserRepository {
     public items: User[] = [];
@@ -35,13 +33,13 @@ export class InMemoryUsersRepository implements UserRepository {
         this.items.filter((props) => props.id !== id);
     }
 
-    async update(userProps: UpdateUserProps): Promise<void> {
+    async update(userProps: UpdateUserProps): Promise<User | null> {
         const index = this.items.findIndex(
             (props) => props.id === userProps.ID_USER,
         );
 
         if (index < 0) {
-            return;
+            return null;
         }
 
         const user = this.items[index];
@@ -56,6 +54,8 @@ export class InMemoryUsersRepository implements UserRepository {
         if (userProps.ID_SITUATION)
             user.updateSituation(userProps.ID_SITUATION);
 
-        this.items[index] = user;
+        //this.items[index] = user;
+
+        return user;
     }
 }
