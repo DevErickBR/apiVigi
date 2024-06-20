@@ -33,10 +33,11 @@ export class InMemoryUsersRepository implements UserRepository {
         this.items.filter((props) => props.id !== id);
     }
 
-    async update(userProps: UpdateUserProps): Promise<User | null> {
-        const index = this.items.findIndex(
-            (props) => props.id === userProps.ID_USER,
-        );
+    async update(
+        id: string,
+        propsUpdate: UpdateUserProps,
+    ): Promise<User | null> {
+        const index = this.items.findIndex((props) => props.id === id);
 
         if (index < 0) {
             return null;
@@ -44,15 +45,16 @@ export class InMemoryUsersRepository implements UserRepository {
 
         const user = this.items[index];
 
-        if (userProps.NAME) user.updateName(userProps.NAME);
-        if (userProps.LASTNAME) user.updateLastname(userProps.LASTNAME);
-        if (userProps.EMAIL) user.updateEmail(userProps.EMAIL);
-        if (userProps.PASSWORD) user.updatePassword(userProps.PASSWORD);
-        if (userProps.ID_LICENCE) user.updateLicence(userProps.ID_LICENCE);
-        if (userProps.LASTED_PAYMENT)
-            user.updatePayment(userProps.LASTED_PAYMENT);
-        if (userProps.ID_SITUATION)
-            user.updateSituation(userProps.ID_SITUATION);
+        if (propsUpdate.NAME) user.updateName(propsUpdate.NAME);
+        if (propsUpdate.LASTNAME) user.updateLastname(propsUpdate.LASTNAME);
+        if (propsUpdate.EMAIL) user.updateEmail(propsUpdate.EMAIL);
+        if (propsUpdate.PASSWORD) user.updatePassword(propsUpdate.PASSWORD);
+        if (propsUpdate.ID_LICENCE) user.updateLicence(propsUpdate.ID_LICENCE);
+        if (propsUpdate.LASTED_PAYMENT)
+            user.updatePayment(propsUpdate.LASTED_PAYMENT);
+        if (propsUpdate.DUE_DATE) user.updateDueDate(propsUpdate.DUE_DATE);
+        if (propsUpdate.ID_SITUATION)
+            user.updateSituation(propsUpdate.ID_SITUATION);
 
         //this.items[index] = user;
 

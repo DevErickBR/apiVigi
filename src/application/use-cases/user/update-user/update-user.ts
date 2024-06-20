@@ -2,7 +2,6 @@ import { User } from '../../../../domain/entities/user';
 import { Either, left, right } from '../../../../domain/errors/either';
 import { UserRepository } from './../../../repositories/user-repository';
 export interface UpdateUserProps {
-    ID_USER: string;
     NAME?: string;
     LASTNAME?: string;
     EMAIL?: string;
@@ -18,9 +17,14 @@ type Response = Either<Error, User>;
 export class UpdateUser {
     constructor(private userRepository: UserRepository) {}
 
-    async execute(props: UpdateUserProps): Promise<Response> {
-        const result = await this.userRepository.update(props);
+    async execute(id: string, propsUpdate: UpdateUserProps): Promise<Response> {
+        if (propsUpdate.EMAIL) {
+            if (await this.userRepository.findByEmail(propsUpdate.EMAIL)) {
+                return left(new Error('email already in use'));
+            }
+        }
 
+        const result = await this.userRepository.update(id, propsUpdate);
         if (result) {
             return right(result);
         }
