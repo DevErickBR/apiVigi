@@ -14,7 +14,7 @@ describe('update an situation', () => {
     let updateSituation: UpdateSituation;
 
     beforeAll(() => {
-        situationProps = { DESCRIPTION: 'new test', ID_SITUATION: 5 };
+        situationProps = { DESCRIPTION: 'test', ID_SITUATION: 5 };
         situation = new Situation(situationProps);
         situationRepository = new InMemorySituationsRepository();
         updateSituation = new UpdateSituation(situationRepository);
@@ -25,10 +25,44 @@ describe('update an situation', () => {
         const result = await updateSituation.execute(situation.id!, {
             DESCRIPTION: 'new test',
         });
-
         expect(result.isRight()).toBe(true);
         if (result.isRight()) {
             expect(result.value.description).toBe('new test');
+        }
+    });
+});
+
+describe('Deny update an situation', () => {
+    let situation: Situation;
+    let situationRepository: SituationRepository;
+    let situationProps: SituationProps;
+    let updateSituation: UpdateSituation;
+
+    beforeAll(() => {
+        situationProps = { DESCRIPTION: 'test', ID_SITUATION: 5 };
+        situation = new Situation(situationProps);
+        situationRepository = new InMemorySituationsRepository();
+        updateSituation = new UpdateSituation(situationRepository);
+        situationRepository.save(situation);
+    });
+
+    it('should be able deny update description of the situation, if case description already in use', async () => {
+        const result = await updateSituation.execute(situation.id!, {
+            DESCRIPTION: 'test',
+        });
+        expect(result.isLeft()).toBe(true);
+        if (result.isLeft()) {
+            expect(result.value.message).toBe('description already in use');
+        }
+    });
+
+    it('should be able deny update description of the situation, if case description not found', async () => {
+        const result = await updateSituation.execute(situation.id! + 503, {
+            DESCRIPTION: 'test',
+        });
+        expect(result.isLeft()).toBe(true);
+        if (result.isLeft()) {
+            expect(result.value.message).toBe('situation not found');
         }
     });
 });

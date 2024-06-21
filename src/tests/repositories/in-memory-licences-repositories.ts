@@ -1,5 +1,6 @@
 import { Licence } from './../../domain/entities/licence';
 import { LicenceRepository } from '../../application/repositories/licence-repository';
+import { UpdateLicenceProps } from '../../application/use-cases/licence/update-licence/update-licence';
 
 export class InMemoryLicencesRepository implements LicenceRepository {
     public licences: Licence[] = [];
@@ -32,5 +33,29 @@ export class InMemoryLicencesRepository implements LicenceRepository {
 
     async save(licence: Licence): Promise<void> {
         this.licences.push(licence);
+    }
+
+    async update(
+        id: number,
+        updateProps: UpdateLicenceProps,
+    ): Promise<Licence | null> {
+        const index = this.licences.findIndex((props) => props.id === id);
+
+        if (index < 0) {
+            return null;
+        }
+
+        const licence = this.licences[index];
+
+        if (updateProps.NAME_LICENCE)
+            licence.updateDescription(updateProps.NAME_LICENCE);
+        if (updateProps.DURATION_DAYS)
+            licence.updateDuration(updateProps.DURATION_DAYS);
+
+        return licence;
+    }
+
+    async delete(id: number): Promise<void> {
+        this.licences.filter((props) => props.id !== id);
     }
 }

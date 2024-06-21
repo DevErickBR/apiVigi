@@ -18,17 +18,21 @@ export class UpdateUser {
     constructor(private userRepository: UserRepository) {}
 
     async execute(id: string, propsUpdate: UpdateUserProps): Promise<Response> {
-        if (propsUpdate.EMAIL) {
-            if (await this.userRepository.findByEmail(propsUpdate.EMAIL)) {
-                return left(new Error('email already in use'));
+        if (await this.userRepository.findById(id)) {
+            if (propsUpdate.EMAIL) {
+                if (await this.userRepository.findByEmail(propsUpdate.EMAIL)) {
+                    return left(new Error('email already in use'));
+                }
             }
+
+            const result = await this.userRepository.update(id, propsUpdate);
+            if (result) {
+                return right(result);
+            }
+
+            return left(new Error('user not update'));
         }
 
-        const result = await this.userRepository.update(id, propsUpdate);
-        if (result) {
-            return right(result);
-        }
-
-        return left(new Error('user not update'));
+        return left(new Error('user not found'));
     }
 }

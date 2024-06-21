@@ -117,6 +117,30 @@ describe('Update an user', () => {
             expect(result.value.dueDate).toStrictEqual(new Date('2024-01-01'));
         }
     });
+});
+
+describe('Deny update an User', () => {
+    const userProps = {
+        ID_USER: randomUUID(),
+        NAME: 'fulano',
+        LASTNAME: 'cliclano',
+        EMAIL: 'fulano@cliclano.com',
+        ID_LICENCE: 99,
+        ID_SITUATION: 1,
+        PASSWORD: '12345678',
+        LASTED_PAYMENT: new Date(),
+    };
+
+    let user: User;
+    let userRepository: UserRepository;
+    let updateUser: UpdateUser;
+
+    beforeAll(() => {
+        user = new User(userProps);
+        userRepository = new InMemoryUsersRepository();
+        updateUser = new UpdateUser(userRepository);
+        userRepository.save(user);
+    });
 
     it('should be able deny update user, if case email parameter already in use', async () => {
         const newUser = new User({
@@ -139,6 +163,18 @@ describe('Update an user', () => {
         if (result.isLeft()) {
             expect(result.value).instanceOf(Error);
             expect(result.value.message).toBe('email already in use');
+        }
+    });
+
+    it('should be able deny update an user, if case user not fould', async () => {
+        const result = await updateUser.execute(user.id + 5500, {
+            EMAIL: 'erick@cliclano.com',
+        });
+
+        expect(result.isLeft()).toBe(true);
+        if (result.isLeft()) {
+            expect(result.value).instanceOf(Error);
+            expect(result.value.message).toBe('user not found');
         }
     });
 });
