@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import MainRouter from './routers/MainRouter';
-import { sequelize } from './instances/mysql';
+import { sequelize } from './infra/instances/mysql';
 import './models';
 
 dotenv.config();

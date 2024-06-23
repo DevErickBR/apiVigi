@@ -6,7 +6,7 @@ export class Hash {
         return hash_password;
     }
 
-    static async verifyPassword(
+    static async isVerifyPassword(
         password: string,
         hashedPassword: string,
     ): Promise<boolean> {

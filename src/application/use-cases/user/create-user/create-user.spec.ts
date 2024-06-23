@@ -27,7 +27,7 @@ describe('Create user with use case', () => {
         expect(newUser.isRight()).toBe(true);
         if (newUser.isRight()) {
             expect(
-                await Hash.verifyPassword(
+                await Hash.isVerifyPassword(
                     userRequest.PASSWORD,
                     newUser.value.password,
                 ),
@@ -64,7 +64,7 @@ describe('Create user with use case', () => {
         expect(newUser.isRight()).toBe(true);
         if (newUser.isRight()) {
             expect(
-                await Hash.verifyPassword(
+                await Hash.isVerifyPassword(
                     userRequest.PASSWORD,
                     newUser.value.password,
                 ),

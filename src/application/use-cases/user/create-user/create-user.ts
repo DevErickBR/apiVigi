@@ -3,7 +3,7 @@ import { LicenceRepository } from '../../../repositories/licence-repository';
 import { UserRepository } from '../../../repositories/user-repository';
 import { randomUUID } from 'crypto';
 import { User, UserProps } from '../../../../domain/entities/user';
-import { FindDueDate } from '../../../utils/get-due-date';
+import { DateUtils } from '../../../utils/dateUtils';
 import { Either, left } from '../../../../domain/errors/either';
 import { Hash } from '../../../../security/hash-password';
 
@@ -52,7 +52,7 @@ export class CreateUser {
         if (!licence) {
             return left(new Error('licence dont exist!'));
         }
-        const dueDate = FindDueDate.CalcDueDate(
+        const dueDate = DateUtils.getDueDate(
             props.LASTED_PAYMENT,
             licence!.duration,
         );

@@ -36,7 +36,7 @@ export class UserModel extends Model<UserModel> {
         type: DataType.STRING,
         allowNull: false,
     })
-    LASTANAME!: string;
+    LASTNAME!: string;
 
     @Column({
         type: DataType.STRING,
@@ -67,13 +67,19 @@ export class UserModel extends Model<UserModel> {
         type: DataType.DATE,
         allowNull: false,
     })
-    LASTED_PAYMENTE!: Date;
+    LASTED_PAYMENT!: Date;
 
     @Column({
         type: DataType.DATE,
         allowNull: false,
     })
     DUE_DATE!: Date;
+
+    @Column({
+        type: DataType.CHAR,
+        allowNull: false,
+    })
+    PASSWORD!: string;
 
     @HasMany(() => AssocGroupUserModel)
     AssocGroupUser!: AssocGroupUserModel;

@@ -7,15 +7,13 @@ export interface UserProps {
     ID_SITUATION: number;
     ID_LICENCE: number;
     LASTED_PAYMENT: Date;
-    DUE_DATE?: Date;
+    DUE_DATE: Date;
 }
 
 export class User {
-    constructor(private props: UserProps) {
-        const dueDate = props.DUE_DATE ?? new Date();
+    constructor(public props: UserProps) {
         this.props = {
             ...props,
-            DUE_DATE: dueDate,
         };
     }
 
