@@ -26,7 +26,6 @@ describe('Calculate due date', () => {
 
     it('shound be able deny an due date if smaller the lasted payment', async () => {
         const result = DateUtils.getDueDate(new Date('2024-01-01'), -40);
-        console.log(result);
         expect(result.isLeft()).toBe(true);
         if (result.isLeft()) {
             expect(result.value).instanceOf(Error);

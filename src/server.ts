@@ -1,9 +1,9 @@
+import { sequelize } from './infra/instances/sql-server';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import MainRouter from './routers/MainRouter';
-import { sequelize } from './infra/instances/mysql';
+import moment from 'moment-timezone';
 import './models';
 
 dotenv.config();
@@ -16,7 +16,6 @@ server.use(
     }),
 );
 
-const moment = require('moment-timezone');
 moment.tz.setDefault('America/Sao_Paulo');
 
 server.use(express.static(path.join(__dirname, '../public')));

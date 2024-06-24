@@ -6,7 +6,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-type Response = Either<Error, string>;
+export interface AuthResponse {
+    token: string;
+    idUser: string;
+    emailUser: string;
+}
+
+type Response = Either<Error, AuthResponse>;
 
 export class AuthController {
     constructor(private userRepository: UserRepository) {}
@@ -28,6 +34,11 @@ export class AuthController {
             expiresIn: '3h',
         });
 
-        return right(token);
+        const userAuth: AuthResponse = {
+            emailUser: user.email,
+            idUser: user.id,
+            token: token,
+        };
+        return right(userAuth);
     }
 }

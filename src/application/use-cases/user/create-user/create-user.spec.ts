@@ -1,17 +1,43 @@
-import { it, describe, expect } from 'vitest';
+import { Licence } from './../../../../domain/entities/licence';
+import { Situation } from './../../../../domain/entities/situation';
+import { LicenceRepository } from './../../../repositories/licence-repository';
+import { SituationRepository } from './../../../repositories/situation-repository';
+import { it, describe, expect, beforeEach } from 'vitest';
 import { randomUUID } from 'crypto';
-import { CreateUser } from './create-user';
+import { CreateUser, CreateUserRequest } from './create-user';
 import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories';
-import { User } from '../../../../domain/entities/user';
 import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories';
+import { UserRepository } from '../../../repositories/user-repository';
+import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories';
 import { Hash } from '../../../../security/hash-password';
+import { User } from '../../../../domain/entities/user';
 
 describe('Create user with use case', () => {
+    let usersRepo: UserRepository;
+    let licenceRepo: LicenceRepository;
+    let situationRepo: SituationRepository;
+    let createUser: CreateUser;
+    let userRequest: CreateUserRequest;
+    let situation: Situation;
+    let licence: Licence;
+
+    beforeEach(async () => {
+        usersRepo = new InMemoryUsersRepository();
+        licenceRepo = new InMemoryLicencesRepository();
+        situationRepo = new InMemorySituationsRepository();
+        createUser = new CreateUser(usersRepo, licenceRepo, situationRepo);
+        situation = new Situation({ DESCRIPTION: 'test', ID_SITUATION: 1 });
+        licence = new Licence({
+            DURATION_DAYS: 30,
+            NAME_LICENCE: 'test',
+            ID_LICENCE: 99,
+        });
+        situationRepo.save(situation);
+        licenceRepo.save(licence);
+    });
+
     it('should be able create an user', async () => {
-        const usersRepo = new InMemoryUsersRepository();
-        const licenceRepo = new InMemoryLicencesRepository();
-        const createUser = new CreateUser(usersRepo, licenceRepo);
-        const userRequest = {
+        userRequest = {
             ID_USER: randomUUID(),
             NAME: 'fulano',
             LASTNAME: 'cliclano',
@@ -21,9 +47,7 @@ describe('Create user with use case', () => {
             PASSWORD: '12345678',
             LASTED_PAYMENT: new Date(),
         };
-
         const newUser = await createUser.execute(userRequest);
-
         expect(newUser.isRight()).toBe(true);
         if (newUser.isRight()) {
             expect(
@@ -46,11 +70,7 @@ describe('Create user with use case', () => {
     });
 
     it('should be able create an user case not inform params id', async () => {
-        const usersRepo = new InMemoryUsersRepository();
-        const licenceRepo = new InMemoryLicencesRepository();
-        const createUser = new CreateUser(usersRepo, licenceRepo);
-
-        const userRequest = {
+        userRequest = {
             NAME: 'fulano',
             LASTNAME: 'cliclano',
             EMAIL: 'fulano@cliclano.com',
@@ -83,11 +103,7 @@ describe('Create user with use case', () => {
     });
 
     it('should be able deny creation of a user, case ID already exist', async () => {
-        const usersRepo = new InMemoryUsersRepository();
-        const licenceRepo = new InMemoryLicencesRepository();
-        const createUser = new CreateUser(usersRepo, licenceRepo);
-
-        const userRequest = {
+        userRequest = {
             ID_USER: randomUUID(),
             NAME: 'fulano',
             LASTNAME: 'cliclano',
@@ -100,7 +116,7 @@ describe('Create user with use case', () => {
 
         const newUser = await createUser.execute(userRequest);
         if (newUser.isRight()) {
-            usersRepo.items.push(newUser.value);
+            usersRepo.save(newUser.value);
         }
 
         const user = await createUser.execute(userRequest);
@@ -112,11 +128,7 @@ describe('Create user with use case', () => {
     });
 
     it('should be able deny creation of a user, case EMAIL already exist', async () => {
-        const usersRepo = new InMemoryUsersRepository();
-        const licenceRepo = new InMemoryLicencesRepository();
-        const createUser = new CreateUser(usersRepo, licenceRepo);
-
-        const userRequest = {
+        userRequest = {
             NAME: 'fulano',
             LASTNAME: 'cliclano',
             EMAIL: 'fulano@cliclano.com',
@@ -128,7 +140,7 @@ describe('Create user with use case', () => {
 
         const newUser = await createUser.execute(userRequest);
         if (newUser.isRight()) {
-            usersRepo.items.push(newUser.value);
+            usersRepo.save(newUser.value);
         }
 
         const user = await createUser.execute(userRequest);
@@ -139,11 +151,7 @@ describe('Create user with use case', () => {
     });
 
     it('should be able deny creation of a use, case LICENCE not exist', async () => {
-        const usersRepo = new InMemoryUsersRepository();
-        const licenceRepo = new InMemoryLicencesRepository();
-        const createUser = new CreateUser(usersRepo, licenceRepo);
-
-        const userRequest = {
+        userRequest = {
             NAME: 'fulano',
             LASTNAME: 'cliclano',
             EMAIL: 'fulano@exemple.com',
@@ -161,11 +169,7 @@ describe('Create user with use case', () => {
     });
 
     it('should be able deny creation of a use, case an DUE DATE invalid or smaller LASTPAYMENT', async () => {
-        const usersRepo = new InMemoryUsersRepository();
-        const licenceRepo = new InMemoryLicencesRepository();
-        const createUser = new CreateUser(usersRepo, licenceRepo);
-
-        const userRequest = {
+        userRequest = {
             NAME: 'fulano',
             LASTNAME: 'cliclano',
             EMAIL: 'fulano@exemple.com',

@@ -19,7 +19,7 @@ export class SituationModel extends Model<SituationModel> {
         allowNull: false,
         unique: true,
     })
-    SITUATION!: string;
+    DESCRIPTION!: string;
 
     @HasMany(() => UserModel)
     USERS!: UserModel[];

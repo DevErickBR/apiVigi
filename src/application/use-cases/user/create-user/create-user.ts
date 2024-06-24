@@ -1,3 +1,4 @@
+import { SituationRepository } from './../../../repositories/situation-repository';
 import { right } from '../../../../domain/errors/either';
 import { LicenceRepository } from '../../../repositories/licence-repository';
 import { UserRepository } from '../../../repositories/user-repository';
@@ -7,7 +8,7 @@ import { DateUtils } from '../../../utils/dateUtils';
 import { Either, left } from '../../../../domain/errors/either';
 import { Hash } from '../../../../security/hash-password';
 
-interface CreateUserRequest {
+export interface CreateUserRequest {
     ID_USER?: string;
     NAME: string;
     LASTNAME: string;
@@ -25,6 +26,7 @@ export class CreateUser {
     constructor(
         private userRepository: UserRepository,
         private licenceRepository: LicenceRepository,
+        private situationRepository: SituationRepository,
     ) {}
 
     async execute(props: CreateUserRequest): Promise<Response> {
@@ -61,8 +63,15 @@ export class CreateUser {
             return left(dueDate.value);
         }
 
-        const userId = props.ID_USER || randomUUID();
+        const situation = await this.situationRepository.findById(
+            props.ID_SITUATION,
+        );
 
+        if (!situation) {
+            return left(new Error('situation not exist'));
+        }
+
+        const userId = props.ID_USER || randomUUID();
         const hashedPassword = await Hash.execute(props.PASSWORD);
 
         const userProps: UserProps = {
@@ -72,8 +81,8 @@ export class CreateUser {
             NAME: props.NAME,
             LASTNAME: props.LASTNAME,
             EMAIL: props.EMAIL,
-            ID_LICENCE: props.ID_LICENCE,
-            ID_SITUATION: props.ID_SITUATION,
+            ID_LICENCE: licence.id!,
+            ID_SITUATION: situation.id!,
             LASTED_PAYMENT: props.LASTED_PAYMENT,
         };
 

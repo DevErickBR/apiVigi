@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const sequelize = new Sequelize({
+export const sequelize = new Sequelize({
     dialect: 'mssql',
     host: process.env.SQL_HOST as string,
     database: process.env.SQL_DB as string,
