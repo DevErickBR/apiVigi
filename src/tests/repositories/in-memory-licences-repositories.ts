@@ -1,6 +1,6 @@
-import { Licence } from './../../domain/entities/licence';
-import { LicenceRepository } from '../../application/repositories/licence-repository';
-import { UpdateLicenceProps } from '../../application/use-cases/licence/update-licence/update-licence';
+import { Licence } from './../../domain/entities/licence.ts';
+import { LicenceRepository } from '../../application/repositories/licence-repository.ts';
+import { UpdateLicenceProps } from '../../application/use-cases/licence/update-licence/update-licence.ts';
 
 export class InMemoryLicencesRepository implements LicenceRepository {
     public licences: Licence[] = [];

@@ -1,5 +1,5 @@
-import { AssocRoleUserRepository } from '../../application/repositories/assoc-role-user-repository';
-import { AssocRoleUser } from '../../domain/entities/assoc-role-user';
+import { AssocRoleUserRepository } from '../../application/repositories/assoc-role-user-repository.ts';
+import { AssocRoleUser } from '../../domain/entities/assoc-role-user.ts';
 
 export class InMemoryAssocRoleUser implements AssocRoleUserRepository {
     public assocs: AssocRoleUser[] = [];

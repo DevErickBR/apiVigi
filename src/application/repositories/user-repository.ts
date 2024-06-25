@@ -1,5 +1,5 @@
-import { User } from '../../domain/entities/user';
-import { UpdateUserProps } from '../use-cases/user/update-user/update-user';
+import { User } from '../../domain/entities/user.ts';
+import { UpdateUserProps } from '../use-cases/user/update-user/update-user.ts';
 
 export interface UserRepository {
     findByEmail(email: string): Promise<User | null>;

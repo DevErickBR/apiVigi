@@ -1,8 +1,11 @@
-import { LicenceRepository } from './../../../repositories/licence-repository';
-import { Licence, LicenceProps } from './../../../../domain/entities/licence';
-import { UpdateLicence } from './update-licence';
+import { LicenceRepository } from './../../../repositories/licence-repository.ts';
+import {
+    Licence,
+    LicenceProps,
+} from './../../../../domain/entities/licence.ts';
+import { UpdateLicence } from './update-licence.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories';
+import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories.ts';
 
 describe('Update an Licence', () => {
     let updateLicence: UpdateLicence;

@@ -1,7 +1,7 @@
-import { right } from './../../../../domain/errors/either';
-import { RoleRepository } from './../../../repositories/role-repository';
-import { Either, left } from '../../../../domain/errors/either';
-import { Role, RoleProps } from '../../../../domain/entities/role';
+import { right } from './../../../../domain/errors/either.ts';
+import { RoleRepository } from './../../../repositories/role-repository.ts';
+import { Either, left } from '../../../../domain/errors/either.ts';
+import { Role, RoleProps } from '../../../../domain/entities/role.ts';
 
 type Response = Either<Error, Role>;
 

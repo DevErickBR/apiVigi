@@ -1,7 +1,7 @@
-import { LicenceRepository } from '../../application/repositories/licence-repository';
-import { Licence } from '../../domain/entities/licence';
-import { LicenceModel } from '../../models/licenceModel';
-import { UpdateLicenceProps } from '../../application/use-cases/licence/update-licence/update-licence';
+import { LicenceRepository } from '../../application/repositories/licence-repository.ts';
+import { Licence } from '../../domain/entities/licence.ts';
+import { LicenceModel } from '../../models/licenceModel.ts';
+import { UpdateLicenceProps } from '../../application/use-cases/licence/update-licence/update-licence.ts';
 
 export class SequelizeLicenceRepository implements LicenceRepository {
     private toDomain(licenceModel: LicenceModel) {

@@ -1,4 +1,4 @@
-import { AssocGroupUser } from './../../domain/entities/assoc-group-user';
+import { AssocGroupUser } from './../../domain/entities/assoc-group-user.ts';
 
 export interface AssocGroupUserRepository {
     FindPerGroupAndUser(

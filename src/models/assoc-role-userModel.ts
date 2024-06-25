@@ -6,14 +6,13 @@ import {
     Model,
     Table,
 } from 'sequelize-typescript';
-import { RoleModel } from './roleModel';
-import { UserModel } from './userModel';
+import { RoleModel } from './roleModel.ts';
+import { UserModel } from './userModel.ts';
 
-Table({
+@Table({
     tableName: 'ASSOC_ROLES_USERS',
     timestamps: false,
-});
-
+})
 export class AssocRoleUserModel extends Model<AssocRoleUserModel> {
     @ForeignKey(() => RoleModel)
     @Column({
@@ -21,10 +20,10 @@ export class AssocRoleUserModel extends Model<AssocRoleUserModel> {
         autoIncrement: false,
         primaryKey: true,
         type: DataType.INTEGER,
+        field: 'ID_ROLE',
     })
-    ID_ROLE!: number;
-    @BelongsTo(() => RoleModel)
-    ROLE!: RoleModel;
+    @BelongsTo(() => RoleModel, { foreignKey: 'ID_ROLE', as: 'role' })
+    roleAssociation!: RoleModel;
 
     @ForeignKey(() => UserModel)
     @Column({
@@ -32,7 +31,8 @@ export class AssocRoleUserModel extends Model<AssocRoleUserModel> {
         autoIncrement: false,
         primaryKey: true,
         type: DataType.CHAR,
+        field: 'ID_USER',
     })
-    @BelongsTo(() => UserModel)
-    USER!: UserModel;
+    @BelongsTo(() => UserModel, { foreignKey: 'ID_USER', as: 'user' })
+    userAssociation!: UserModel;
 }

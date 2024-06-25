@@ -1,9 +1,9 @@
-import { GetAssocRoleUser } from './get-assoc-role-user';
-import { AssocRoleUserRepository } from './../../../repositories/assoc-role-user-repository';
+import { GetAssocRoleUser } from './get-assoc-role-user.ts';
+import { AssocRoleUserRepository } from './../../../repositories/assoc-role-user-repository.ts';
 import { UUID, randomUUID } from 'crypto';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { AssocRoleUser } from '../../../../domain/entities/assoc-role-user';
-import { InMemoryAssocRoleUser } from '../../../../tests/repositories/in-memory-assoc-role-user';
+import { AssocRoleUser } from '../../../../domain/entities/assoc-role-user.ts';
+import { InMemoryAssocRoleUser } from '../../../../tests/repositories/in-memory-assoc-role-user.ts';
 
 describe('getting an association between user the role', () => {
     let assocRoleUser: AssocRoleUser;

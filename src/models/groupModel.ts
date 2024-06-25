@@ -1,5 +1,5 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import { AssocGroupUserModel } from './assoc-group-userModel';
+import { AssocGroupUserModel } from './assoc-group-userModel.ts';
 
 @Table({
     tableName: 'TB_GROUPS',
@@ -10,12 +10,12 @@ export class GroupModel extends Model<GroupModel> {
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
     })
     ID_GROUP!: number;
     @Column({
         allowNull: false,
-        type: DataType.STRING,
+        type: DataType.CHAR,
         unique: true,
     })
     DESCRIPTION!: string;

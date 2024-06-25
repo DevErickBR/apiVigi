@@ -1,5 +1,5 @@
-import { AssocGroupUserRepository } from '../../application/repositories/assoc-group-user-repository';
-import { AssocGroupUser } from '../../domain/entities/assoc-group-user';
+import { AssocGroupUserRepository } from '../../application/repositories/assoc-group-user-repository.ts';
+import { AssocGroupUser } from '../../domain/entities/assoc-group-user.ts';
 
 export class InMemoryAssocGroupUser implements AssocGroupUserRepository {
     public associations: AssocGroupUser[] = [];

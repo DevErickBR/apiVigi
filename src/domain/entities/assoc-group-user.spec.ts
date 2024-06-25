@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { User } from './user';
-import { Group } from './group';
+import { User } from './user.ts';
+import { Group } from './group.ts';
 import { randomUUID } from 'crypto';
-import { AssocGroupUser } from './assoc-group-user';
+import { AssocGroupUser } from './assoc-group-user.ts';
 
 describe('Create an association between user the group', () => {
     let user: User;

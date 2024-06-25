@@ -1,4 +1,4 @@
-import { AssocGroupRole } from './../../domain/entities/assoc-group-role';
+import { AssocGroupRole } from './../../domain/entities/assoc-group-role.ts';
 
 export interface AssocGroupRoleRepository {
     findByAssoc(assoc: AssocGroupRole): Promise<AssocGroupRole | null>;

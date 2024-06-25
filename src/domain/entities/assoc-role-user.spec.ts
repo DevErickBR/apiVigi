@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { User } from './user';
+import { User } from './user.ts';
 import { randomUUID } from 'crypto';
-import { Role } from './role';
-import { AssocRoleUser } from './assoc-role-user';
+import { Role } from './role.ts';
+import { AssocRoleUser } from './assoc-role-user.ts';
 
 describe('Create an association between user the role', () => {
     let user: User;
@@ -25,7 +25,7 @@ describe('Create an association between user the role', () => {
 
     it('should be able create an association', () => {
         const result = new AssocRoleUser({
-            ID_ROLE: role.id,
+            ID_ROLE: role.id!,
             ID_USER: user.id,
         });
 

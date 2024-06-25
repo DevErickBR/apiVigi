@@ -1,7 +1,7 @@
-import { UserRepository } from '../../application/repositories/user-repository';
-import { User } from '../../domain/entities/user';
-import { UserModel } from '../../models/userModel';
-import { UpdateUserProps } from '../../application/use-cases/user/update-user/update-user';
+import { UserRepository } from '../../application/repositories/user-repository.ts';
+import { User } from '../../domain/entities/user.ts';
+import { UserModel } from '../../models/userModel.ts';
+import { UpdateUserProps } from '../../application/use-cases/user/update-user/update-user.ts';
 
 export class SequelizeUserRepository implements UserRepository {
     private toDomain(userModel: UserModel): User {
@@ -17,7 +17,7 @@ export class SequelizeUserRepository implements UserRepository {
     async findByEmail(email: string): Promise<User | null> {
         const user = await UserModel.findOne({ where: { EMAIL: email } });
         if (!user) return null;
-        return this.toDomain(user);
+        return this.toDomain(user.dataValues);
     }
 
     async delete(id: string): Promise<void> {

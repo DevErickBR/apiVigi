@@ -1,6 +1,6 @@
-import { Group } from '../../../../domain/entities/group';
-import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories';
-import { GetGroup } from './get-group';
+import { Group } from '../../../../domain/entities/group.ts';
+import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories.ts';
+import { GetGroup } from './get-group.ts';
 import { it, describe, expect } from 'vitest';
 
 describe('getting groups with use case', () => {

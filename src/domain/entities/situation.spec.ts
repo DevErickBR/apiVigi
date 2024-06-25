@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Situation, SituationProps } from './situation';
+import { Situation, SituationProps } from './situation.ts';
 
 describe('Create an situation with entities', () => {
     it('should be able create an user', () => {

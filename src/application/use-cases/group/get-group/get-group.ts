@@ -1,6 +1,6 @@
-import { Either, left, right } from '../../../../domain/errors/either';
-import { GroupRepository } from '../../../repositories/group-repository';
-import { Group } from '../../../../domain/entities/group';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
+import { GroupRepository } from '../../../repositories/group-repository.ts';
+import { Group } from '../../../../domain/entities/group.ts';
 
 type Response = Either<Error, Group>;
 

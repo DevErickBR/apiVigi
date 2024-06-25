@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DateUtils } from './dateUtils';
+import { DateUtils } from './dateUtils.ts';
 
 describe('Calculate due date', () => {
     it('shound be able calculate due date', async () => {

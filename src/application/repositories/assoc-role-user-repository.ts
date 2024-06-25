@@ -1,4 +1,4 @@
-import { AssocRoleUser } from '../../domain/entities/assoc-role-user';
+import { AssocRoleUser } from '../../domain/entities/assoc-role-user.ts';
 
 export interface AssocRoleUserRepository {
     findByAssoc(assoc: AssocRoleUser): Promise<AssocRoleUser | null>;

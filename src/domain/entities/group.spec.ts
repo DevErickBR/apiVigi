@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Group, GroupProps } from './group';
+import { Group, GroupProps } from './group.ts';
 
 describe('Create an group with entities', () => {
     it('should be able create an Group', () => {

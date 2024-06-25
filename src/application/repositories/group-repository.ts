@@ -1,5 +1,5 @@
-import { Group } from '../../domain/entities/group';
-import { UpdateGroupProps } from '../use-cases/group/update-group/update-group';
+import { Group } from '../../domain/entities/group.ts';
+import { UpdateGroupProps } from '../use-cases/group/update-group/update-group.ts';
 
 export interface GroupRepository {
     findById(id: number): Promise<Group | null>;

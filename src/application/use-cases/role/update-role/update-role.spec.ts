@@ -1,8 +1,8 @@
-import { UpdateRole } from './update-role';
-import { RoleRepository } from './../../../repositories/role-repository';
-import { Role, RoleProps } from './../../../../domain/entities/role';
+import { UpdateRole } from './update-role.ts';
+import { RoleRepository } from './../../../repositories/role-repository.ts';
+import { Role, RoleProps } from './../../../../domain/entities/role.ts';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { InMemoryRolesRepositores } from '../../../../tests/repositories/in-memory-roles-repositories';
+import { InMemoryRolesRepositores } from '../../../../tests/repositories/in-memory-roles-repositories.ts';
 
 describe('update role', () => {
     let roleProps: RoleProps;

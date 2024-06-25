@@ -1,6 +1,6 @@
-import { AssocRoleUser } from '../../../../domain/entities/assoc-role-user';
-import { Either, left, right } from './../../../../domain/errors/either';
-import { AssocRoleUserRepository } from '../../../repositories/assoc-role-user-repository';
+import { AssocRoleUser } from '../../../../domain/entities/assoc-role-user.ts';
+import { Either, left, right } from './../../../../domain/errors/either.ts';
+import { AssocRoleUserRepository } from '../../../repositories/assoc-role-user-repository.ts';
 
 type Response = Either<Error, AssocRoleUser>;
 

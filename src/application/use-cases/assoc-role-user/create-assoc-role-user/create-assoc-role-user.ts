@@ -1,11 +1,11 @@
-import { RoleRepository } from './../../../repositories/role-repository';
-import { UserRepository } from './../../../repositories/user-repository';
-import { AssocRoleUserRepository } from './../../../repositories/assoc-role-user-repository';
+import { RoleRepository } from './../../../repositories/role-repository.ts';
+import { UserRepository } from './../../../repositories/user-repository.ts';
+import { AssocRoleUserRepository } from './../../../repositories/assoc-role-user-repository.ts';
 import {
     AssocRoleUser,
     AssocRoleUserProps,
-} from '../../../../domain/entities/assoc-role-user';
-import { Either, left, right } from '../../../../domain/errors/either';
+} from '../../../../domain/entities/assoc-role-user.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
 
 type Response = Either<Error, AssocRoleUser>;
 

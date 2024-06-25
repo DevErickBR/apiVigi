@@ -1,4 +1,4 @@
-import { compare, hash } from 'bcryptjs';
+import { hash, compare } from 'bcrypt';
 
 export class Hash {
     static async execute(password: string): Promise<string> {

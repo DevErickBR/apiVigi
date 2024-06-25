@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
+import * as models from '../../models/index.ts';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ export const sequelize = new Sequelize({
     username: process.env.SQL_USER as string,
     password: process.env.SQL_PASSWORD as string,
     port: parseInt(process.env.SQL_PORT as string),
-    models: [__dirname + '/models'],
+    models: Object.values(models),
 });
 
 export default sequelize;

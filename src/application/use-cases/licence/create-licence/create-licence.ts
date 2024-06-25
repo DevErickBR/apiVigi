@@ -1,6 +1,6 @@
-import { LicenceRepository } from '../../../repositories/licence-repository';
-import { Licence } from '../../../../domain/entities/licence';
-import { Either, left, right } from '../../../../domain/errors/either';
+import { LicenceRepository } from '../../../repositories/licence-repository.ts';
+import { Licence } from '../../../../domain/entities/licence.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
 
 interface CreateLicenceRequest {
     ID_LICENCE?: number;

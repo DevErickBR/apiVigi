@@ -1,5 +1,5 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import { UserModel } from './userModel';
+import { AssocRoleUserModel } from './assoc-role-userModel.ts';
 
 @Table({
     tableName: 'TB_ROLES',
@@ -22,6 +22,6 @@ export class RoleModel extends Model<RoleModel> {
     })
     DESCRIPTION!: string;
 
-    @HasMany(() => UserModel)
-    USER!: UserModel;
+    @HasMany(() => AssocRoleUserModel)
+    USER!: AssocRoleUserModel;
 }

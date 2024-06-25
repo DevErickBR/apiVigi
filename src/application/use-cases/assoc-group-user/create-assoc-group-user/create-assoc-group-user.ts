@@ -1,11 +1,11 @@
-import { GroupRepository } from '../../../repositories/group-repository';
-import { UserRepository } from '../../../repositories/user-repository';
+import { GroupRepository } from '../../../repositories/group-repository.ts';
+import { UserRepository } from '../../../repositories/user-repository.ts';
 import {
     AssocGroupUser,
     AssocGroupUserProps,
-} from '../../../../domain/entities/assoc-group-user';
-import { Either, left, right } from '../../../../domain/errors/either';
-import { AssocGroupUserRepository } from '../../../repositories/assoc-group-user-repository';
+} from '../../../../domain/entities/assoc-group-user.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
+import { AssocGroupUserRepository } from '../../../repositories/assoc-group-user-repository.ts';
 
 type Response = Either<Error, AssocGroupUser>;
 

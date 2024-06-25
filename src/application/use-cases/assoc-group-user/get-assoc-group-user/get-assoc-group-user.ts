@@ -1,6 +1,6 @@
-import { AssocGroupUserRepository } from './../../../repositories/assoc-group-user-repository';
-import { AssocGroupUser } from '../../../../domain/entities/assoc-group-user';
-import { Either, left, right } from '../../../../domain/errors/either';
+import { AssocGroupUserRepository } from './../../../repositories/assoc-group-user-repository.ts';
+import { AssocGroupUser } from '../../../../domain/entities/assoc-group-user.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
 
 type Response = Either<Error, AssocGroupUser>;
 

@@ -1,11 +1,11 @@
-import { UpdateSituation } from './update-situation';
-import { SituationRepository } from './../../../repositories/situation-repository';
+import { UpdateSituation } from './update-situation.ts';
+import { SituationRepository } from './../../../repositories/situation-repository.ts';
 import {
     Situation,
     SituationProps,
-} from './../../../../domain/entities/situation';
+} from './../../../../domain/entities/situation.ts';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories';
+import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories.ts';
 
 describe('update an situation', () => {
     let situation: Situation;

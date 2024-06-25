@@ -1,6 +1,6 @@
-import { RoleRepository } from '../../application/repositories/role-repository';
-import { UpdateRoleProps } from '../../application/use-cases/role/update-role/update-role';
-import { Role } from '../../domain/entities/role';
+import { RoleRepository } from '../../application/repositories/role-repository.ts';
+import { UpdateRoleProps } from '../../application/use-cases/role/update-role/update-role.ts';
+import { Role } from '../../domain/entities/role.ts';
 
 export class InMemoryRolesRepositores implements RoleRepository {
     public roles: Role[] = [];

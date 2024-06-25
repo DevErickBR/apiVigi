@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Licence } from './licence';
+import { Licence } from './licence.ts';
 
 describe('Create Licence with entities', () => {
     it('Shound be able create an licence', () => {

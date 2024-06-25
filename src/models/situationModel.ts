@@ -1,5 +1,5 @@
 import { Table, Column, DataType, HasMany, Model } from 'sequelize-typescript';
-import { UserModel } from './userModel';
+import { UserModel } from './userModel.ts';
 
 @Table({
     tableName: 'TB_SITUATIONS',
@@ -8,18 +8,18 @@ import { UserModel } from './userModel';
 export class SituationModel extends Model<SituationModel> {
     @Column({
         primaryKey: true,
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
         allowNull: false,
         autoIncrement: true,
     })
     ID_SITUATION!: number;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.CHAR,
         allowNull: false,
         unique: true,
     })
-    DESCRIPTION!: string;
+    SITUATION!: string;
 
     @HasMany(() => UserModel)
     USERS!: UserModel[];

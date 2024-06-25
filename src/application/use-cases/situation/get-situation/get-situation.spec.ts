@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories';
+import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories.ts';
 import {
     Situation,
     SituationProps,
-} from '../../../../domain/entities/situation';
-import { CreateSituation } from '../create-situation/create-situation';
-import { GetSituation } from './get-situation';
+} from '../../../../domain/entities/situation.ts';
+import { CreateSituation } from '../create-situation/create-situation.ts';
+import { GetSituation } from './get-situation.ts';
 
 describe('Find an situation', async () => {
     let situationRepo: InMemorySituationsRepository;

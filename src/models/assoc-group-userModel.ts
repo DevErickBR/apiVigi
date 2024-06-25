@@ -6,8 +6,8 @@ import {
     Model,
     Table,
 } from 'sequelize-typescript';
-import { UserModel } from './userModel';
-import { GroupModel } from './groupModel';
+import { UserModel } from './userModel.ts';
+import { GroupModel } from './groupModel.ts';
 
 @Table({
     tableName: 'ASSOC_USERS_GROUPS',
@@ -19,20 +19,20 @@ export class AssocGroupUserModel extends Model<AssocGroupUserModel> {
         primaryKey: true,
         allowNull: false,
         autoIncrement: false,
-        type: DataType.STRING,
+        type: DataType.CHAR,
+        field: 'ID_USER',
     })
-    ID_USER!: string;
-    @BelongsTo(() => UserModel)
-    USER!: UserModel;
+    @BelongsTo(() => UserModel, { foreignKey: 'ID_USER', as: 'user' })
+    userAssociation!: UserModel;
 
     @ForeignKey(() => GroupModel)
     @Column({
         primaryKey: true,
         allowNull: false,
         autoIncrement: false,
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
+        field: 'ID_GROUP',
     })
-    ID_GROUP!: number;
-    @BelongsTo(() => GroupModel)
-    GROUP!: GroupModel;
+    @BelongsTo(() => GroupModel, { foreignKey: 'ID_GROUP', as: 'group' })
+    groupAssociation!: GroupModel;
 }

@@ -1,8 +1,8 @@
-import { UpdateGroup } from './update-group';
-import { Group, GroupProps } from './../../../../domain/entities/group';
-import { GroupRepository } from './../../../repositories/group-repository';
+import { UpdateGroup } from './update-group.ts';
+import { Group, GroupProps } from './../../../../domain/entities/group.ts';
+import { GroupRepository } from './../../../repositories/group-repository.ts';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories';
+import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories.ts';
 
 describe('Update an group', () => {
     let groupRepository: GroupRepository;

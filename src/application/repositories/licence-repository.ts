@@ -1,5 +1,5 @@
-import { Licence } from '../../domain/entities/licence';
-import { UpdateLicenceProps } from '../use-cases/licence/update-licence/update-licence';
+import { Licence } from '../../domain/entities/licence.ts';
+import { UpdateLicenceProps } from '../use-cases/licence/update-licence/update-licence.ts';
 
 export interface LicenceRepository {
     findById(id: number): Promise<Licence | null>;

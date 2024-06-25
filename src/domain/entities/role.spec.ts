@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Role, RoleProps } from './role';
+import { Role, RoleProps } from './role.ts';
 
 describe('Create Role with entities', () => {
     it('should be able create an user', () => {

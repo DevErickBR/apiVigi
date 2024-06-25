@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { InMemoryAssocGroupUser } from '../../../../tests/repositories/in-memory-assoc-group-user';
-import { AssocGroupUser } from '../../../../domain/entities/assoc-group-user';
-import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories';
-import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories';
-import { CreateAssocGroupUser } from '../create-assoc-group-user/create-assoc-group-user';
-import { User } from '../../../../domain/entities/user';
-import { Group } from '../../../../domain/entities/group';
+import { InMemoryAssocGroupUser } from '../../../../tests/repositories/in-memory-assoc-group-user.ts';
+import { AssocGroupUser } from '../../../../domain/entities/assoc-group-user.ts';
+import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories.ts';
+import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories.ts';
+import { CreateAssocGroupUser } from '../create-assoc-group-user/create-assoc-group-user.ts';
+import { User } from '../../../../domain/entities/user.ts';
+import { Group } from '../../../../domain/entities/group.ts';
 import { randomUUID } from 'crypto';
-import { GetAssocGroupUser } from './get-assoc-group-user';
+import { GetAssocGroupUser } from './get-assoc-group-user.ts';
 
 describe('Searching an Association between user the group', () => {
     let assocGroupUserRepo: InMemoryAssocGroupUser;

@@ -1,9 +1,9 @@
-import { SituationRepository } from '../../../repositories/situation-repository';
+import { SituationRepository } from '../../../repositories/situation-repository.ts';
 import {
     Situation,
     SituationProps,
-} from '../../../../domain/entities/situation';
-import { Either, left, right } from '../../../../domain/errors/either';
+} from '../../../../domain/entities/situation.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
 
 type Response = Either<Error, Situation>;
 

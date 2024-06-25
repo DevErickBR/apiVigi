@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { verify } from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import * as jwt from 'jsonwebtoken';
 dotenv.config();
 
 type TokenPayload = {
@@ -19,9 +19,8 @@ export function AuthMiddware(req: Request, res: Response, next: NextFunction) {
     const [, token] = authorization.split(' ');
 
     try {
-        const decode = verify(token, process.env.SECRET_KEY as string);
+        const decode = jwt.verify(token, process.env.SECRET_KEY as string);
         const { id } = decode as TokenPayload;
-
         req.userId = id;
         next();
     } catch (error) {

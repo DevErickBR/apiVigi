@@ -1,6 +1,6 @@
-import { UpdateUserProps } from './../../application/use-cases/user/update-user/update-user';
-import { User } from '../../domain/entities/user';
-import { UserRepository } from '../../application/repositories/user-repository';
+import { UpdateUserProps } from './../../application/use-cases/user/update-user/update-user.ts';
+import { User } from '../../domain/entities/user.ts';
+import { UserRepository } from '../../application/repositories/user-repository.ts';
 
 export class InMemoryUsersRepository implements UserRepository {
     public items: User[] = [];

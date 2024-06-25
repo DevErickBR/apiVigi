@@ -1,6 +1,6 @@
-import { Situation } from '../../../../domain/entities/situation';
-import { Either, left, right } from '../../../../domain/errors/either';
-import { SituationRepository } from '../../../repositories/situation-repository';
+import { Situation } from '../../../../domain/entities/situation.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
+import { SituationRepository } from '../../../repositories/situation-repository.ts';
 
 type Response = Either<Error, Situation>;
 

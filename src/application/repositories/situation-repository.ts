@@ -1,5 +1,5 @@
-import { UpdateSituationProps } from '../use-cases/situation/update-situation/update-situation';
-import { Situation } from './../../domain/entities/situation';
+import { UpdateSituationProps } from '../use-cases/situation/update-situation/update-situation.ts';
+import { Situation } from './../../domain/entities/situation.ts';
 export interface SituationRepository {
     findById(id: number): Promise<Situation | null>;
     findByName(name: string): Promise<Situation | null>;

@@ -1,6 +1,6 @@
-import { UpdateGroupProps } from '../../application/use-cases/group/update-group/update-group';
-import { Group } from '../../domain/entities/group';
-import { GroupRepository } from './../../application/repositories/group-repository';
+import { UpdateGroupProps } from '../../application/use-cases/group/update-group/update-group.ts';
+import { Group } from '../../domain/entities/group.ts';
+import { GroupRepository } from './../../application/repositories/group-repository.ts';
 
 export class InMemoruGroupRepository implements GroupRepository {
     public groups: Group[] = [];

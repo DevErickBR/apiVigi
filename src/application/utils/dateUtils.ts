@@ -1,4 +1,4 @@
-import { Either, left, right } from '../../domain/errors/either';
+import { Either, left, right } from '../../domain/errors/either.ts';
 
 export interface DueDateProps {
     dueDate: Date;
@@ -17,11 +17,12 @@ export class DateUtils {
     }
 
     static getDueDate(lastedPayment: Date, duration: number): Response {
-        const validLastedPayment = this.isValidDate(lastedPayment);
+        const dateStart = new Date(lastedPayment);
+        const validLastedPayment = this.isValidDate(dateStart);
         if (validLastedPayment == false) {
             return left(new Error('invalid date,plase, review your params'));
         }
-        const resultDueDate = new Date(lastedPayment.getTime() + duration);
+        const resultDueDate = new Date(dateStart.getTime() + duration);
         if (resultDueDate < lastedPayment) {
             return left(
                 new Error(

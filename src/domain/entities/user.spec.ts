@@ -1,5 +1,5 @@
 import { expect, describe, it, beforeEach } from 'vitest';
-import { User, UserProps } from './user';
+import { User, UserProps } from './user.ts';
 import { randomUUID } from 'crypto';
 
 describe('Create User with entities', () => {

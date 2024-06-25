@@ -1,7 +1,7 @@
 import { it, describe, expect } from 'vitest';
-import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories';
-import { Group, GroupProps } from '../../../../domain/entities/group';
-import { CreateGroup } from './create-group';
+import { InMemoruGroupRepository } from '../../../../tests/repositories/in-memory-groups-repositories.ts';
+import { Group, GroupProps } from '../../../../domain/entities/group.ts';
+import { CreateGroup } from './create-group.ts';
 
 describe('Create an Group', async () => {
     it('should be able create an user', async () => {

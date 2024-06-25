@@ -8,9 +8,10 @@ import {
     BelongsTo,
     HasMany,
 } from 'sequelize-typescript';
-import { LicenceModel } from './licenceModel';
-import { SituationModel } from './situationModel';
-import { AssocGroupUserModel } from './assoc-group-userModel';
+import { LicenceModel } from './licenceModel.ts';
+import { SituationModel } from './situationModel.ts';
+import { AssocGroupUserModel } from './assoc-group-userModel.ts';
+import { AssocRoleUserModel } from './assoc-role-userModel.ts';
 
 @Table({
     tableName: 'TB_USERS',
@@ -27,19 +28,19 @@ export class UserModel extends Model<UserModel> {
     ID_USER!: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.CHAR,
         allowNull: false,
     })
     NAME!: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.CHAR,
         allowNull: false,
     })
     LASTNAME!: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.CHAR,
         allowNull: false,
         unique: true,
     })
@@ -47,7 +48,7 @@ export class UserModel extends Model<UserModel> {
 
     @ForeignKey(() => LicenceModel)
     @Column({
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
         allowNull: false,
     })
     ID_LICENCE!: number;
@@ -56,7 +57,7 @@ export class UserModel extends Model<UserModel> {
 
     @ForeignKey(() => SituationModel)
     @Column({
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
         allowNull: false,
     })
     ID_SITUATION!: number;
@@ -76,11 +77,14 @@ export class UserModel extends Model<UserModel> {
     DUE_DATE!: Date;
 
     @Column({
-        type: DataType.CHAR,
+        type: DataType.BLOB,
         allowNull: false,
     })
     PASSWORD!: string;
 
     @HasMany(() => AssocGroupUserModel)
-    AssocGroupUser!: AssocGroupUserModel;
+    assocGroupUser!: AssocGroupUserModel;
+
+    @HasMany(() => AssocRoleUserModel)
+    assocRoleUser!: AssocRoleUserModel;
 }

@@ -1,15 +1,16 @@
-import { sequelize } from './infra/instances/sql-server';
+import { sequelize } from './infra/instances/sql-server.ts';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import moment from 'moment-timezone';
-import './models';
-import MainRouter from './routers/MainRouters'
+import MainRouter from './routers/mainRouters.ts';
 
 dotenv.config();
 
 const server = express();
+const currentDir = new URL('.', import.meta.url).pathname;
+const publicDir = path.join(currentDir, '../public');
 
 server.use(
     cors({
@@ -19,7 +20,7 @@ server.use(
 
 moment.tz.setDefault('America/Sao_Paulo');
 
-server.use(express.static(path.join(__dirname, '../public')));
+server.use(express.static(publicDir));
 server.use(express.urlencoded({ extended: true }));
 
 server.use(MainRouter);
@@ -32,7 +33,7 @@ const startServer = async () => {
         server.listen(process.env.PORT);
         console.log('server initialize');
     } catch (err) {
-        console.error('server is not initialize! check all variants.');
+        console.error('server is not initialize! check all variants.', err);
     }
 };
 

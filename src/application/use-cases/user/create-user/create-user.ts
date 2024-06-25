@@ -1,12 +1,12 @@
-import { SituationRepository } from './../../../repositories/situation-repository';
-import { right } from '../../../../domain/errors/either';
-import { LicenceRepository } from '../../../repositories/licence-repository';
-import { UserRepository } from '../../../repositories/user-repository';
+import { SituationRepository } from './../../../repositories/situation-repository.ts';
+import { right } from '../../../../domain/errors/either.ts';
+import { LicenceRepository } from '../../../repositories/licence-repository.ts';
+import { UserRepository } from '../../../repositories/user-repository.ts';
 import { randomUUID } from 'crypto';
-import { User, UserProps } from '../../../../domain/entities/user';
-import { DateUtils } from '../../../utils/dateUtils';
-import { Either, left } from '../../../../domain/errors/either';
-import { Hash } from '../../../../security/hash-password';
+import { User, UserProps } from '../../../../domain/entities/user.ts';
+import { DateUtils } from '../../../utils/dateUtils.ts';
+import { Either, left } from '../../../../domain/errors/either.ts';
+import { Hash } from '../../../../security/hash-password.ts';
 
 export interface CreateUserRequest {
     ID_USER?: string;

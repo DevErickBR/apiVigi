@@ -1,6 +1,6 @@
-import { Group } from '../../../../domain/entities/group';
-import { Either, left, right } from '../../../../domain/errors/either';
-import { GroupRepository } from './../../../repositories/group-repository';
+import { Group } from '../../../../domain/entities/group.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
+import { GroupRepository } from './../../../repositories/group-repository.ts';
 
 export interface UpdateGroupProps {
     DESCRIPTION: string;

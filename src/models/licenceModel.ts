@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
-import { UserModel } from './userModel';
+import { UserModel } from './userModel.ts';
 
 @Table({
     tableName: 'TB_LICENCES',
@@ -10,7 +10,7 @@ export class LicenceModel extends Model<LicenceModel> {
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
     })
     ID_LICENCE!: number;
 
@@ -19,11 +19,11 @@ export class LicenceModel extends Model<LicenceModel> {
         unique: true,
         type: DataType.STRING,
     })
-    NAME_LICENCE!: string;
+    LICENCE!: string;
 
     @Column({
         allowNull: false,
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
     })
     DURATION_DAYS!: number;
 

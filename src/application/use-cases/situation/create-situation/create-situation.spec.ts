@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
     Situation,
     SituationProps,
-} from '../../../../domain/entities/situation';
-import { CreateSituation } from './create-situation';
-import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories';
+} from '../../../../domain/entities/situation.ts';
+import { CreateSituation } from './create-situation.ts';
+import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories.ts';
 
 describe('Creat an situation', () => {
     it('should be able create an situation, case exist paramans id', async () => {

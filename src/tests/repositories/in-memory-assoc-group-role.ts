@@ -1,5 +1,5 @@
-import { AssocGroupRole } from '../../domain/entities/assoc-group-role';
-import { AssocGroupRoleRepository } from './../../application/repositories/assoc-group-role-repository';
+import { AssocGroupRole } from '../../domain/entities/assoc-group-role.ts';
+import { AssocGroupRoleRepository } from './../../application/repositories/assoc-group-role-repository.ts';
 
 export class InMemoryAssocGroupRole implements AssocGroupRoleRepository {
     public assocs: AssocGroupRole[] = [];

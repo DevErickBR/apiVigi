@@ -1,6 +1,6 @@
-import { SituationRepository } from '../../application/repositories/situation-repository';
-import { UpdateSituationProps } from '../../application/use-cases/situation/update-situation/update-situation';
-import { Situation } from '../../domain/entities/situation';
+import { SituationRepository } from '../../application/repositories/situation-repository.ts';
+import { UpdateSituationProps } from '../../application/use-cases/situation/update-situation/update-situation.ts';
+import { Situation } from '../../domain/entities/situation.ts';
 
 export class InMemorySituationsRepository implements SituationRepository {
     public situations: Situation[] = [];

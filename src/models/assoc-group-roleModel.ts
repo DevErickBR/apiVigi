@@ -6,8 +6,8 @@ import {
     Model,
     Table,
 } from 'sequelize-typescript';
-import { RoleModel } from './roleModel';
-import { GroupModel } from './groupModel';
+import { RoleModel } from './roleModel.ts';
+import { GroupModel } from './groupModel.ts';
 
 @Table({
     tableName: 'ASSOC_GROUPS_ROLES',
@@ -20,9 +20,10 @@ export class AssocGroupRoleModel extends Model<AssocGroupRoleModel> {
         autoIncrement: false,
         primaryKey: true,
         type: DataType.INTEGER,
+        field: 'ID_GROUP',
     })
-    @BelongsTo(() => GroupModel)
-    Group!: GroupModel;
+    @BelongsTo(() => GroupModel, { foreignKey: 'ID_GROUP', as: 'group' })
+    groupAssociation!: GroupModel;
 
     @ForeignKey(() => RoleModel)
     @Column({
@@ -30,7 +31,8 @@ export class AssocGroupRoleModel extends Model<AssocGroupRoleModel> {
         autoIncrement: false,
         primaryKey: true,
         type: DataType.INTEGER,
+        field: 'ID_ROLE',
     })
-    @BelongsTo(() => RoleModel)
-    Role!: RoleModel;
+    @BelongsTo(() => GroupModel, { foreignKey: 'ID_GROUP', as: 'role' })
+    roleAssociation!: RoleModel;
 }

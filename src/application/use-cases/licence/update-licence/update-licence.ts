@@ -1,6 +1,6 @@
-import { Licence } from '../../../../domain/entities/licence';
-import { Either, left, right } from '../../../../domain/errors/either';
-import { LicenceRepository } from './../../../repositories/licence-repository';
+import { Licence } from '../../../../domain/entities/licence.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
+import { LicenceRepository } from './../../../repositories/licence-repository.ts';
 
 export interface UpdateLicenceProps {
     NAME_LICENCE?: string;

@@ -1,6 +1,6 @@
-import { Role } from '../../../../domain/entities/role';
-import { Either, left, right } from '../../../../domain/errors/either';
-import { RoleRepository } from './../../../repositories/role-repository';
+import { Role } from '../../../../domain/entities/role.ts';
+import { Either, left, right } from '../../../../domain/errors/either.ts';
+import { RoleRepository } from './../../../repositories/role-repository.ts';
 
 export interface UpdateRoleProps {
     DESCRIPTION: string;

@@ -1,15 +1,15 @@
-import { CreateAssocRoleUser } from './create-assoc-role-user';
-import { InMemoryAssocRoleUser } from '../../../../tests/repositories/in-memory-assoc-role-user';
-import { InMemoryRolesRepositores } from '../../../../tests/repositories/in-memory-roles-repositories';
-import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories';
-import { AssocRoleUserRepository } from './../../../repositories/assoc-role-user-repository';
-import { RoleRepository } from './../../../repositories/role-repository';
-import { UserRepository } from './../../../repositories/user-repository';
+import { CreateAssocRoleUser } from './create-assoc-role-user.ts';
+import { InMemoryAssocRoleUser } from '../../../../tests/repositories/in-memory-assoc-role-user.ts';
+import { InMemoryRolesRepositores } from '../../../../tests/repositories/in-memory-roles-repositories.ts';
+import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories.ts';
+import { AssocRoleUserRepository } from './../../../repositories/assoc-role-user-repository.ts';
+import { RoleRepository } from './../../../repositories/role-repository.ts';
+import { UserRepository } from './../../../repositories/user-repository.ts';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { Role } from '../../../../domain/entities/role';
+import { Role } from '../../../../domain/entities/role.ts';
 import { randomUUID } from 'crypto';
-import { User } from '../../../../domain/entities/user';
-import { AssocRoleUser } from '../../../../domain/entities/assoc-role-user';
+import { User } from '../../../../domain/entities/user.ts';
+import { AssocRoleUser } from '../../../../domain/entities/assoc-role-user.ts';
 
 describe('create an association between user the role, with use case', () => {
     let userRepository: UserRepository;

@@ -1,5 +1,5 @@
-import { Role } from '../../domain/entities/role';
-import { UpdateRoleProps } from '../use-cases/role/update-role/update-role';
+import { Role } from '../../domain/entities/role.ts';
+import { UpdateRoleProps } from '../use-cases/role/update-role/update-role.ts';
 
 export interface RoleRepository {
     findById(id: number): Promise<Role | null>;
