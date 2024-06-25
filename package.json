@@ -6,9 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "dev": "nodemon -e ts,json src/server.ts",
-    "lint": "eslint ./src  --ext .ts",
-    "lint-fix": "eslint ./src --ext .ts --fix"
+    "dev": "nodemon -e ts,json src/server.ts"
   },
   "author": "",
   "license": "ISC",

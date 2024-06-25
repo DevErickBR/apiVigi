@@ -5,6 +5,7 @@ import cors from 'cors';
 import path from 'path';
 import moment from 'moment-timezone';
 import './models';
+import MainRouter from './routers/MainRouters'
 
 dotenv.config();
 

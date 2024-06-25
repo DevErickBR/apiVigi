@@ -46,7 +46,7 @@ export class SequelizeLicenceRepository implements LicenceRepository {
     }
 
     async save(licence: Licence): Promise<void> {
-        const licenceModel = await LicenceModel.build({
+        const licenceModel = LicenceModel.build({
             ID_LICENCE: licence.id,
             NAME_LICENCE: licence.name,
             DURATION_DAYS: licence.duration,
