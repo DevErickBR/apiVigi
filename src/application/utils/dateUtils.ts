@@ -9,20 +9,20 @@ type Response = Either<Error, Date>;
 
 export class DateUtils {
     static isValidDate(dueDate: Date): boolean {
-        if (isNaN(dueDate.getTime())) {
+        if (dueDate.toString() == 'Invalid Date') {
             return false;
+        } else {
+            return true;
         }
-
-        return true;
     }
 
     static getDueDate(lastedPayment: Date, duration: number): Response {
-        const dateStart = new Date(lastedPayment);
-        const validLastedPayment = this.isValidDate(dateStart);
-        if (validLastedPayment == false) {
+        const validLastedPayment = this.isValidDate(lastedPayment);
+        if (!validLastedPayment) {
             return left(new Error('invalid date,plase, review your params'));
         }
-        const resultDueDate = new Date(dateStart.getTime() + duration);
+        const resultDueDate = new Date(lastedPayment);
+        resultDueDate.setDate(lastedPayment.getDate() + duration);
         if (resultDueDate < lastedPayment) {
             return left(
                 new Error(

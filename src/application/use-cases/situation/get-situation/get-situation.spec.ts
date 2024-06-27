@@ -15,7 +15,7 @@ describe('Find an situation', async () => {
     beforeEach(async () => {
         situationRepo = new InMemorySituationsRepository();
         situationProps = {
-            DESCRIPTION: 'test',
+            SITUATION: 'test',
             ID_SITUATION: 1,
         };
         situation = new CreateSituation(situationRepo);

@@ -5,7 +5,7 @@ import { SituationRepository } from './../../../repositories/situation-repositor
 type Response = Either<Error, Situation>;
 
 export interface UpdateSituationProps {
-    DESCRIPTION: string;
+    SITUATION: string;
 }
 
 export class UpdateSituation {
@@ -13,7 +13,7 @@ export class UpdateSituation {
 
     async execute(id: number, props: UpdateSituationProps): Promise<Response> {
         if (await this.situationRepository.findById(id)) {
-            if (await this.situationRepository.findByName(props.DESCRIPTION)) {
+            if (await this.situationRepository.findByName(props.SITUATION)) {
                 return left(new Error('description already in use'));
             }
             const result = await this.situationRepository.update(id, props);

@@ -19,7 +19,7 @@ export class AuthController {
 
     async Authenticate(email: string, password: string): Promise<Response> {
         const user = await this.userRepository.findByEmail(email);
-        if (!user) {
+        if (user === null) {
             return left(new Error('email not found'));
         }
         console.log(user);

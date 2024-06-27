@@ -35,6 +35,7 @@ export class CreateUser {
                 return left(new Error('ID already exist'));
             }
         }
+
         if (props.EMAIL) {
             if (await this.userRepository.findByEmail(props.EMAIL)) {
                 return left(new Error('Email already registeresd'));
@@ -42,7 +43,7 @@ export class CreateUser {
         }
 
         if (props.DUE_DATE) {
-            if (isNaN(props.DUE_DATE.getDate())) {
+            if (!DateUtils.isValidDate(props.DUE_DATE)) {
                 return left(
                     new Error('invalid date,plase, review your params'),
                 );
@@ -54,10 +55,10 @@ export class CreateUser {
         if (!licence) {
             return left(new Error('licence dont exist!'));
         }
-        const dueDate = DateUtils.getDueDate(
-            props.LASTED_PAYMENT,
-            licence!.duration,
-        );
+
+        const payment = new Date(props.LASTED_PAYMENT);
+
+        const dueDate = DateUtils.getDueDate(payment, licence!.duration);
 
         if (dueDate.isLeft()) {
             return left(dueDate.value);
@@ -83,7 +84,7 @@ export class CreateUser {
             EMAIL: props.EMAIL,
             ID_LICENCE: licence.id!,
             ID_SITUATION: situation.id!,
-            LASTED_PAYMENT: props.LASTED_PAYMENT,
+            LASTED_PAYMENT: payment,
         };
 
         const user = new User(userProps);

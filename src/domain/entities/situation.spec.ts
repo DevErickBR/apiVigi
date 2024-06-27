@@ -4,13 +4,13 @@ import { Situation, SituationProps } from './situation.ts';
 describe('Create an situation with entities', () => {
     it('should be able create an user', () => {
         const situationProps: SituationProps = {
-            DESCRIPTION: 'test',
+            SITUATION: 'test',
             ID_SITUATION: 1,
         };
 
         const situation = new Situation(situationProps);
         expect(situation).instanceOf(Situation);
-        expect(situation.description).toBe(situationProps.DESCRIPTION);
+        expect(situation.description).toBe(situationProps.SITUATION);
         expect(situation.id).toBe(situationProps.ID_SITUATION);
     });
 });

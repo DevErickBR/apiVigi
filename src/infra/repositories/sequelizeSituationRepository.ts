@@ -19,7 +19,7 @@ export class SequelizeSituationRepository implements SituationRepository {
 
     async findByName(name: string): Promise<Situation | null> {
         const situationModel = await SituationModel.findOne({
-            where: { DESCRIPTION: name },
+            where: { SITUATION: name },
         });
         if (situationModel) {
             return this.toDomain(situationModel);
@@ -35,7 +35,7 @@ export class SequelizeSituationRepository implements SituationRepository {
     async save(situation: Situation): Promise<void> {
         const situationModel = SituationModel.build({
             ID_SITUATION: situation.id,
-            DESCRIPTION: situation.description,
+            SITUATION: situation.description,
         } as SituationModel);
 
         await situationModel.save();

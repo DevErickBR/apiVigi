@@ -19,7 +19,7 @@ export class SequelizeLicenceRepository implements LicenceRepository {
 
     async findByName(name: string): Promise<Licence | null> {
         const licenceModel = await LicenceModel.findOne({
-            where: { NAME_LICENCE: name },
+            where: { LICENCE: name },
         });
         if (licenceModel) {
             const licence = this.toDomain(licenceModel);
@@ -48,7 +48,7 @@ export class SequelizeLicenceRepository implements LicenceRepository {
     async save(licence: Licence): Promise<void> {
         const licenceModel = LicenceModel.build({
             ID_LICENCE: licence.id,
-            NAME_LICENCE: licence.name,
+            LICENCE: licence.name,
             DURATION_DAYS: licence.duration,
         } as LicenceModel);
 

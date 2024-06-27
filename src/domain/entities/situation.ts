@@ -1,6 +1,6 @@
 export interface SituationProps {
     ID_SITUATION?: number;
-    DESCRIPTION: string;
+    SITUATION: string;
 }
 
 export class Situation {
@@ -13,10 +13,10 @@ export class Situation {
     }
 
     get description() {
-        return this.props.DESCRIPTION;
+        return this.props.SITUATION;
     }
 
     updateDescription(description: string) {
-        this.props.DESCRIPTION = description;
+        this.props.SITUATION = description;
     }
 }

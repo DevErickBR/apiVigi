@@ -28,7 +28,7 @@ describe('generate jeson web token', () => {
         licence = new Licence({
             ID_LICENCE: 1,
             DURATION_DAYS: 30,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
         });
         userProps = {
             ID_USER: randomUUID(),
@@ -42,7 +42,7 @@ describe('generate jeson web token', () => {
         };
         licenceRepository.save(licence);
         situationRepository = new InMemorySituationsRepository();
-        situation = new Situation({ DESCRIPTION: 'test', ID_SITUATION: 1 });
+        situation = new Situation({ SITUATION: 'test', ID_SITUATION: 1 });
         situationRepository.save(situation);
         createUser = new CreateUser(
             userRepository,

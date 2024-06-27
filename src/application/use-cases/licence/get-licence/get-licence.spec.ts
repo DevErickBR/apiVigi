@@ -30,7 +30,7 @@ describe('Get Licence use case', () => {
         const licenceProps = new Licence({
             ID_LICENCE: 1,
             DURATION_DAYS: 30,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
         });
         const licenceRepository = new InMemoryLicencesRepository();
         const licence = new GetLicence(licenceRepository);
@@ -46,7 +46,7 @@ describe('Get Licence use case', () => {
         const licenceProps = new Licence({
             ID_LICENCE: 1,
             DURATION_DAYS: 30,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
         });
         const licenceRepository = new InMemoryLicencesRepository();
         const licence = new GetLicence(licenceRepository);

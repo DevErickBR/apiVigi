@@ -33,8 +33,8 @@ export class InMemorySituationsRepository implements SituationRepository {
         }
         const newSituation = this.situations[index];
 
-        if (propsUpdate.DESCRIPTION)
-            newSituation.updateDescription(propsUpdate.DESCRIPTION);
+        if (propsUpdate.SITUATION)
+            newSituation.updateDescription(propsUpdate.SITUATION);
 
         return newSituation;
     }

@@ -6,7 +6,6 @@ describe('Calculate due date', () => {
         const nowDate = new Date();
         const duration = 40;
         const result = DateUtils.getDueDate(nowDate, duration);
-
         expect(result.isRight()).toBe(true);
         if (result.isRight()) {
             expect(result.value).instanceOf(Date);
@@ -25,8 +24,9 @@ describe('Calculate due date', () => {
     });
 
     it('shound be able deny an due date if smaller the lasted payment', async () => {
-        const result = DateUtils.getDueDate(new Date('2024-01-01'), -40);
+        const result = DateUtils.getDueDate(new Date('2024-01-01'), -30);
         expect(result.isLeft()).toBe(true);
+
         if (result.isLeft()) {
             expect(result.value).instanceOf(Error);
             expect(result.value.message).toBe(

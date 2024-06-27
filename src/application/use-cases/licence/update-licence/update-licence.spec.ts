@@ -16,7 +16,7 @@ describe('Update an Licence', () => {
     beforeEach(() => {
         licenceProps = {
             DURATION_DAYS: 30,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
             ID_LICENCE: 1,
         };
 
@@ -60,7 +60,7 @@ describe('Deny update an Licence', () => {
     beforeEach(() => {
         licenceProps = {
             DURATION_DAYS: 30,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
             ID_LICENCE: 1,
         };
 
@@ -73,7 +73,7 @@ describe('Deny update an Licence', () => {
     it('should be able deny update licence, if case the description already in use', async () => {
         const outherLicence = new Licence({
             DURATION_DAYS: 20,
-            NAME_LICENCE: 'outher licence',
+            LICENCE: 'outher licence',
             ID_LICENCE: 5,
         });
         licenceRepository.save(outherLicence);

@@ -10,7 +10,7 @@ describe('Creat an situation', () => {
     it('should be able create an situation, case exist paramans id', async () => {
         const situationRepo = new InMemorySituationsRepository();
         const situationProps: SituationProps = {
-            DESCRIPTION: 'test',
+            SITUATION: 'test',
             ID_SITUATION: 1,
         };
 
@@ -19,14 +19,14 @@ describe('Creat an situation', () => {
         expect(result.isRight()).toBe(true);
         if (result.isRight()) {
             expect(result.value).instanceOf(Situation);
-            expect(result.value.description).toBe(situationProps.DESCRIPTION);
+            expect(result.value.description).toBe(situationProps.SITUATION);
             expect(result.value.id).toBe(situationProps.ID_SITUATION);
         }
     });
     it('should be able create an situation, case not exist paramans id', async () => {
         const situationRepo = new InMemorySituationsRepository();
         const situationProps: SituationProps = {
-            DESCRIPTION: 'test',
+            SITUATION: 'test',
         };
 
         const situation = new CreateSituation(situationRepo);
@@ -34,7 +34,7 @@ describe('Creat an situation', () => {
         expect(result.isRight()).toBe(true);
         if (result.isRight()) {
             expect(result.value).instanceOf(Situation);
-            expect(result.value.description).toBe(situationProps.DESCRIPTION);
+            expect(result.value.description).toBe(situationProps.SITUATION);
         }
     });
 });
@@ -46,7 +46,7 @@ describe('Deny Creation an situation', () => {
     beforeEach(async () => {
         situationRepo = new InMemorySituationsRepository();
         situationProps = {
-            DESCRIPTION: 'test',
+            SITUATION: 'test',
             ID_SITUATION: 1,
         };
 
@@ -66,7 +66,7 @@ describe('Deny Creation an situation', () => {
         }
     });
     it('should be deny creation of an situation,if ID already registration', async () => {
-        situationProps = { DESCRIPTION: 'test', ID_SITUATION: 3 };
+        situationProps = { SITUATION: 'test', ID_SITUATION: 3 };
         const result = await situation.execute(situationProps);
         expect(result.isLeft()).toBe(true);
         if (result.isLeft()) {

@@ -1,16 +1,16 @@
-import { Licence } from './../../../../domain/entities/licence';
-import { Situation } from './../../../../domain/entities/situation';
-import { LicenceRepository } from './../../../repositories/licence-repository';
-import { SituationRepository } from './../../../repositories/situation-repository';
+import { Licence } from './../../../../domain/entities/licence.ts';
+import { Situation } from './../../../../domain/entities/situation.ts';
+import { LicenceRepository } from './../../../repositories/licence-repository.ts';
+import { SituationRepository } from './../../../repositories/situation-repository.ts';
 import { it, describe, expect, beforeEach } from 'vitest';
 import { randomUUID } from 'crypto';
-import { CreateUser, CreateUserRequest } from './create-user';
-import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories';
-import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories';
-import { UserRepository } from '../../../repositories/user-repository';
-import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories';
-import { Hash } from '../../../../security/hash-password';
-import { User } from '../../../../domain/entities/user';
+import { CreateUser, CreateUserRequest } from './create-user.ts';
+import { InMemoryUsersRepository } from '../../../../tests/repositories/in-memory-users-repositories.ts';
+import { InMemoryLicencesRepository } from '../../../../tests/repositories/in-memory-licences-repositories.ts';
+import { UserRepository } from '../../../repositories/user-repository.ts';
+import { InMemorySituationsRepository } from '../../../../tests/repositories/in-memory-situation-repositories.ts';
+import { Hash } from '../../../../security/hash-password.ts';
+import { User } from '../../../../domain/entities/user.ts';
 
 describe('Create user with use case', () => {
     let usersRepo: UserRepository;
@@ -26,10 +26,10 @@ describe('Create user with use case', () => {
         licenceRepo = new InMemoryLicencesRepository();
         situationRepo = new InMemorySituationsRepository();
         createUser = new CreateUser(usersRepo, licenceRepo, situationRepo);
-        situation = new Situation({ DESCRIPTION: 'test', ID_SITUATION: 1 });
+        situation = new Situation({ SITUATION: 'test', ID_SITUATION: 1 });
         licence = new Licence({
             DURATION_DAYS: 30,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
             ID_LICENCE: 99,
         });
         situationRepo.save(situation);
@@ -168,7 +168,7 @@ describe('Create user with use case', () => {
         }
     });
 
-    it('should be able deny creation of a use, case an DUE DATE invalid or smaller LASTPAYMENT', async () => {
+    it('should be able deny creation of a use, case an DUE DATE invalid', async () => {
         userRequest = {
             NAME: 'fulano',
             LASTNAME: 'cliclano',
@@ -181,10 +181,38 @@ describe('Create user with use case', () => {
         };
 
         const user = await createUser.execute(userRequest);
+        console.log(user);
         expect(user.isLeft()).toBe(true);
         if (user.isLeft()) {
             expect(user.value.message).toBe(
                 'invalid date,plase, review your params',
+            );
+        }
+    });
+    it('should be able deny creation of a use, case an DUE DATE  smaller LASTPAYMENT', async () => {
+        licence = new Licence({
+            DURATION_DAYS: -50,
+            LICENCE: 'new teste',
+            ID_LICENCE: 988,
+        });
+
+        licenceRepo.save(licence);
+        userRequest = {
+            NAME: 'fulano',
+            LASTNAME: 'cliclano',
+            EMAIL: 'fulano@exemple.com',
+            ID_LICENCE: 988,
+            ID_SITUATION: 1,
+            PASSWORD: '123456789',
+            LASTED_PAYMENT: new Date(),
+            DUE_DATE: new Date('2024-01-01'),
+        };
+
+        const user = await createUser.execute(userRequest);
+        expect(user.isLeft()).toBe(true);
+        if (user.isLeft()) {
+            expect(user.value.message).toBe(
+                'not possible register due date shorter than the lasted payment',
             );
         }
     });

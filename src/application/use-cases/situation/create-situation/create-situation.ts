@@ -16,7 +16,7 @@ export class CreateSituation {
                 return left(new Error('ID already exist'));
             }
         }
-        if (await this.situationRepository.findByName(props.DESCRIPTION)) {
+        if (await this.situationRepository.findByName(props.SITUATION)) {
             return left(new Error('description already exist'));
         }
 

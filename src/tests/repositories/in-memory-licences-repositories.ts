@@ -9,7 +9,7 @@ export class InMemoryLicencesRepository implements LicenceRepository {
         const newLicence = new Licence({
             DURATION_DAYS: 30,
             ID_LICENCE: 99,
-            NAME_LICENCE: 'test',
+            LICENCE: 'test',
         });
         this.licences.push(newLicence);
 
