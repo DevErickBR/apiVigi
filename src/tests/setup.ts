@@ -4,11 +4,12 @@ import { execSync } from 'child_process';
 import { randomUUID } from 'crypto';
 import { beforeAll, afterAll } from 'vitest';
 import dotenv from 'dotenv';
-import * as IServer from '../server.ts';
+import { startServer } from '../server.ts';
+import { Server } from 'http';
 
 let sequelize: Sequelize;
 let databaseName: string;
-let httpServer: ReturnType<typeof startServer>;
+let httpServer: Server
 
 dotenv.config({ path: '.env.test' });
 
@@ -21,7 +22,7 @@ beforeAll(async () => {
 
     await sequelize.sync({ force: true });
 
-    httpServer = await IServer.default.startServer();
+    httpServer = await startServer();
 });
 
 afterAll(async () => {

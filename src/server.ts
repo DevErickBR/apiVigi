@@ -5,6 +5,7 @@ import cors from 'cors';
 import path from 'path';
 import moment from 'moment-timezone';
 import MainRouter from './routers/mainRouters.ts';
+import { Server } from 'http';
 
 dotenv.config();
 
@@ -25,19 +26,22 @@ server.use(express.urlencoded({ extended: true }));
 
 server.use(MainRouter);
 
-const startServer = async () => {
-    try {
-        await sequelize.sync({ force: false });
-        console.log('Tables Create and Database connection sucessfull.');
-        const htppServer = server.listen(process.env.PORT, () => {
-            console.log('server initialize');
-        });
-        return htppServer;
-    } catch (err) {
-        console.error('server is not initialize! check all variants.', err);
-    }
+const startServer = async (): Promise<Server> => {
+    return new Promise((resolve, reject) => {
+        try {
+            sequelize.sync({ force: false });
+            console.log('Tables Create and Database connection sucessfull.');
+            const httpServer = server.listen(process.env.PORT, () => {
+                console.log('server initialize');
+                resolve(httpServer);
+            });
+        } catch (err) {
+            console.error('server is not initialize! check all variants.', err);
+            reject(err)
+        }
+    })
 };
 
 startServer();
 
-export default { server, startServer };
+export { server, startServer };
