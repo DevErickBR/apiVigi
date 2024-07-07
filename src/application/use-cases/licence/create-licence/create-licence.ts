@@ -4,7 +4,7 @@ import { Either, left, right } from '../../../../domain/errors/either.ts';
 
 interface CreateLicenceRequest {
     ID_LICENCE?: number;
-    NAME_LICENCE: string;
+    LICENCE: string;
     DURATION_DAYS: number;
 }
 
@@ -22,8 +22,8 @@ export class CreateLicence {
             }
         }
 
-        if (props.NAME_LICENCE) {
-            if (await this.licenceRepository.findByName(props.NAME_LICENCE)) {
+        if (props.LICENCE) {
+            if (await this.licenceRepository.findByName(props.LICENCE)) {
                 return left(new Error('the license name already exists'));
             }
         }

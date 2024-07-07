@@ -29,12 +29,15 @@ const startServer = async () => {
     try {
         await sequelize.sync({ force: false });
         console.log('Tables Create and Database connection sucessfull.');
-
-        server.listen(process.env.PORT);
-        console.log('server initialize');
+        const htppServer = server.listen(process.env.PORT, () => {
+            console.log('server initialize');
+        });
+        return htppServer;
     } catch (err) {
         console.error('server is not initialize! check all variants.', err);
     }
 };
 
 startServer();
+
+export default { server, startServer };

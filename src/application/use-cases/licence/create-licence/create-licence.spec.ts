@@ -7,17 +7,16 @@ describe('Create Licence with use case', () => {
     it('should be able create an licence', async () => {
         const licenceProps = {
             ID_LICENCE: 1,
-            NAME_LICENCE: 'teste',
+            LICENCE: 'teste',
             DURATION_DAYS: 30,
         };
         const licenceRepo = new InMemoryLicencesRepository();
         const licence = new CreateLicence(licenceRepo);
         const result = await licence.execute(licenceProps);
-
         expect(result.isRight()).toBe(true);
         if (result.isRight()) {
             expect(result.value).instanceOf(Licence);
-            expect(result.value.name).toBe(licenceProps.NAME_LICENCE);
+            expect(result.value.name).toBe(licenceProps.LICENCE);
             expect(result.value.id).toBe(licenceProps.ID_LICENCE);
             expect(result.value.duration).toBe(licenceProps.DURATION_DAYS);
         }
@@ -26,7 +25,7 @@ describe('Create Licence with use case', () => {
     it('should be able deny creation an licence, case duration smaller than 0', async () => {
         const licenceProps = {
             ID_LICENCE: 1,
-            NAME_LICENCE: 'teste',
+            LICENCE: 'teste',
             DURATION_DAYS: -3,
         };
         const licenceRepo = new InMemoryLicencesRepository();
@@ -43,7 +42,7 @@ describe('Create Licence with use case', () => {
     it('should be able deny creation an licence,if the id already exist', async () => {
         const licenceProps = {
             ID_LICENCE: 1,
-            NAME_LICENCE: 'teste',
+            LICENCE: 'teste',
             DURATION_DAYS: 30,
         };
         const licenceRepo = new InMemoryLicencesRepository();
@@ -62,7 +61,7 @@ describe('Create Licence with use case', () => {
     it('should be able deny creation an licence,if the licence name already exist', async () => {
         const licenceProps = {
             ID_LICENCE: 3,
-            NAME_LICENCE: 'teste',
+            LICENCE: 'teste',
             DURATION_DAYS: 30,
         };
         const licenceRepo = new InMemoryLicencesRepository();
@@ -74,7 +73,7 @@ describe('Create Licence with use case', () => {
 
         result = await licence.execute({
             ID_LICENCE: 5,
-            NAME_LICENCE: 'teste',
+            LICENCE: 'teste',
             DURATION_DAYS: 30,
         });
 

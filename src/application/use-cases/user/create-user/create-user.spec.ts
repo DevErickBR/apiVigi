@@ -62,7 +62,7 @@ describe('Create user with use case', () => {
             expect(newUser.value.email).toBe(userRequest.EMAIL);
             expect(newUser.value.idLicence).toBe(userRequest.ID_LICENCE);
             expect(newUser.value.idSituation).toBe(userRequest.ID_SITUATION);
-            expect(newUser.value.lastedPayment).toBe(
+            expect(newUser.value.lastedPayment).toStrictEqual(
                 userRequest.LASTED_PAYMENT,
             );
             expect(newUser.value.dueDate).toBeDefined();
@@ -95,7 +95,7 @@ describe('Create user with use case', () => {
             expect(newUser.value.email).toBe(userRequest.EMAIL);
             expect(newUser.value.idLicence).toBe(userRequest.ID_LICENCE);
             expect(newUser.value.idSituation).toBe(userRequest.ID_SITUATION);
-            expect(newUser.value.lastedPayment).toBe(
+            expect(newUser.value.lastedPayment).toStrictEqual(
                 userRequest.LASTED_PAYMENT,
             );
             expect(newUser.value.dueDate).toBeDefined();
@@ -181,7 +181,6 @@ describe('Create user with use case', () => {
         };
 
         const user = await createUser.execute(userRequest);
-        console.log(user);
         expect(user.isLeft()).toBe(true);
         if (user.isLeft()) {
             expect(user.value.message).toBe(
